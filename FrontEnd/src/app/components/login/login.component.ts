@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { EventTypes } from 'src/app/models/event-types';
 import { AuthService } from './../../services/auth.service';
+import { ToastService } from './../../services/toast.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,31 +13,53 @@ import { AuthService } from './../../services/auth.service';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
-    this.loginForm = formBuilder.group({
-      email: ["", [Validators.required, Validators.email]],
-      password: ["", [Validators.required]],
+  @ViewChild('form')
+  formHTML!: HTMLFormElement;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private toastService: ToastService,
+    private router:Router
+  ) {
+    this.loginForm = this.formBuilder.group({
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required]],
     });
   }
 
-  login(){
-    console.log(this.loginForm.value);
-    if(this.loginForm.valid){
-      console.log("mi formulario es valido");
-    }else{
-      console.log("mi formulario no es valido");
+  login($event: Event) {
+    if (this.loginForm.valid) {
+      this.authService.login(this.loginForm.value).subscribe({
+        next: (resp) => {
+          this.toastService.showToast(
+            'Bienvenido',
+            'Usuario correcto',
+            EventTypes.Success
+          );
+            this.router.navigateByUrl("/")
+        },
+        error: (err) => {
+          this.toastService.showToast(
+            'Invalido',
+            'Usuario o contraseña incorrecta',
+            EventTypes.Error
+          );
+          this.loginForm.reset();
+          this.removeValidate();
+        },
+      });
+    } else {
+      this.validate();
     }
   }
 
-  validate($event:Event){
-    var form = document.getElementsByClassName('needs-validation')[0] as HTMLFormElement;
-    if (form.checkValidity() === false) {
-      $event.preventDefault();
-      $event.stopPropagation();
-    }else{
-      console.log("es valid");
-    }
-    form.classList.add('was-validated');
+  //muestra estilos de validacion de bootstrap
+  validate() {
+    this.formHTML['nativeElement'].classList.add('was-validated');
+  }
+  removeValidate() {
+    this.formHTML['nativeElement'].classList.remove('was-validated');
   }
 
   ngOnInit(): void {}

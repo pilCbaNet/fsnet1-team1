@@ -18,6 +18,7 @@ export class AuthInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
+    //manda el token en las request si es que existe
     const token = this.tokenService.getToken();
     if (token) {
       request = request.clone({
@@ -26,6 +27,7 @@ export class AuthInterceptor implements HttpInterceptor {
         },
       });
     }
+    //agarra los errores 401 y 403 del back y te redirige al login
     return next
       .handle(request)
       .pipe(catchError((error) => this.handleAuthError(error)));
