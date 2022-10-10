@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
 import { environment } from './../../environments/environment';
-import { concatMap, map, Observable, of, tap, throwError } from 'rxjs';
+import { concatMap, Observable, of, tap, throwError } from 'rxjs';
 import { TokenService } from './token.service';
 
 @Injectable({

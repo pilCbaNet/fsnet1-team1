@@ -22,9 +22,6 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-      //return true hasta que el login ya este andando
-    return true;
-
     //verifica si estas logueado para el "acceso" a una ruta
     const auth = this.tokenService.isAuthenticated();
     if (!auth) {

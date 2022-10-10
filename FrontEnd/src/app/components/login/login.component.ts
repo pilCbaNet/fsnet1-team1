@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private toastService: ToastService,
-    private router:Router
+    private router: Router
   ) {
     this.loginForm = this.formBuilder.group({
       username: ['', [Validators.required]],
@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  login($event: Event) {
+  login() {
     if (this.loginForm.valid) {
       this.authService.login(this.loginForm.value).subscribe({
         next: (resp) => {
@@ -37,14 +37,10 @@ export class LoginComponent implements OnInit {
             'Usuario correcto',
             EventTypes.Success
           );
-            this.router.navigateByUrl("/")
+          this.router.navigateByUrl('/');
         },
         error: (err) => {
-          this.toastService.showToast(
-            'Invalido',
-            'Usuario o contraseña incorrecta',
-            EventTypes.Error
-          );
+          this.toastService.showToast(':(', err.message, EventTypes.Error);
           this.loginForm.reset();
           this.removeValidate();
         },
@@ -62,5 +58,6 @@ export class LoginComponent implements OnInit {
     this.formHTML['nativeElement'].classList.remove('was-validated');
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 }
