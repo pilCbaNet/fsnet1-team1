@@ -1,1 +1,39 @@
-<p>register works!</p>
+<div class="form-register w-100 m-auto">
+  <form
+    #form
+    class="needs-validation"
+    [formGroup]="registerForm"
+    (ngSubmit)="register()"
+    novalidate
+  >
+    <h3 class="h3 mb-3 fw-normal text-center">Registro</h3>
+    <div class="form-floating has-validation">
+      <input
+        type="text"
+        class="form-control"
+        id="username"
+        placeholder="Nombre de usuario"
+        formControlName="username"
+        required
+      />
+      <label for="username">Nombre de usuario</label>
+    </div>
+    <div class="form-floating has-validation password">
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        placeholder="Contraseña"
+        formControlName="password"
+        required
+      />
+      <label for="password">Contraseña</label>
+    </div>
+    <button class="w-100 btn btn-lg btn-success" type="submit">
+      Registrarse
+    </button>
+  </form>
+</div>
+<div class="w-100 text-center m-auto">
+  <a routerLink="/login" href=""> Iniciar Sesion </a>
+</div>
