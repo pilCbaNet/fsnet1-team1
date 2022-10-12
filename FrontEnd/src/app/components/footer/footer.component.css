@@ -1,0 +1,21 @@
+html {
+    min-height: 100%;
+    position: relative;
+  }
+  body {
+    margin: 0;
+    margin-bottom: 40px;
+  }
+  footer {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(140, 177, 255);
+    color: rgb(0, 0, 0);
+  }
+.locales {
+    display: flex;
+    
+}
