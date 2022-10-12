@@ -1,20 +1,39 @@
-<form [formGroup]="loginForm" class="box needs-validation" novalidate (ngSubmit)="login()">
-  <div class="mb-3">
-    <label for="email" class="form-label">Email address</label>
-    <input
-      type="email"
-      class="form-control"
-      id="email"
-      formControlName="email"
-      required
-    />
-    <div id="emailHelp" class="form-text">
-      We'll never share your email with anyone else.
+<div class="form-signin w-100 m-auto">
+  <form
+    [formGroup]="loginForm"
+    (ngSubmit)="login()"
+    #form
+    class="needs-validation"
+    novalidate
+  >
+    <h3 class="h3 mb-3 fw-normal text-center">Bienvenido :D</h3>
+    <div class="form-floating has-validation">
+      <input
+        type="text"
+        class="form-control"
+        id="username"
+        placeholder="Nombre de usuario"
+        formControlName="username"
+        required
+      />
+      <label for="username">Nombre de usuario</label>
     </div>
-  </div>
-  <div class="mb-3">
-    <label for="password" class="form-label">Password</label>
-    <input type="password" formControlName="password" class="form-control" id="password" required />
-  </div>
-  <button type="button" class="btn btn-primary" (click)="validate($event)">Submit</button>
-</form>
+    <div class="form-floating has-validation">
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        placeholder="Contraseña"
+        formControlName="password"
+        required
+      />
+      <label for="password">Contraseña</label>
+    </div>
+    <button class="w-100 btn btn-lg btn-success" type="submit">
+      Iniciar sesion
+    </button>
+  </form>
+</div>
+<div class="w-100 text-center m-auto">
+  <a routerLink="/register" href=""> Registrarse </a>
+</div>
