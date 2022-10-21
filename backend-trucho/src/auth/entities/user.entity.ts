@@ -1,13 +1,25 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Client } from 'src/client/entities/client.entity';
 
 @Entity()
-export class User {
+export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ nullable: false })
   username: string;
 
-  @Column()
+  @Column({ nullable: false })
   password: string;
+
+  @OneToOne(() => Client, (c) => c.user)
+  @JoinColumn()
+  client: Client;
 }

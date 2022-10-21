@@ -1,6 +1,8 @@
 import { Controller, Post, Body, Get, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
+import { CreateUserDto } from './dto/create-user.dto';
 import { UserDto } from './dto/user.dto';
+import { User } from './entities/user.entity';
 import { JwtAuthGuard } from './jwt-auth.guard';
 
 @Controller('auth')
@@ -13,7 +15,7 @@ export class AuthController {
   }
 
   @Post('/register')
-  register(@Body() userDto: UserDto) {
+  register(@Body() userDto: CreateUserDto): Promise<User> {
     return this.authService.register(userDto);
   }
 

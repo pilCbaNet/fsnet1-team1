@@ -1,13 +1,31 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { User } from 'src/auth/entities/user.entity';
+import { Transaction } from 'src/Transaction/entities/transaction.entity';
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  OneToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
-export class Client {
+export class Client extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ nullable: false })
+  name: string;
+
+  @Column({ nullable: false, default: 0 })
   balance: number;
 
-  //   @Column()
-  //   transactions: string;
+  @OneToOne(() => User, (u) => u.client)
+  user: User;
+
+  @OneToMany(() => Transaction, (t) => t.giver)
+  transfers: Transaction[];
+
+  @OneToMany(() => Transaction, (t) => t.receiver)
+  deposits: Transaction[];
 }

@@ -1,26 +1,61 @@
-import { Injectable } from '@nestjs/common';
-import { CreateClientDto } from './dto/create-client.dto';
-import { UpdateClientDto } from './dto/update-client.dto';
+import { Inject, Injectable, HttpException } from '@nestjs/common';
+import { Client } from 'src/client/entities/client.entity';
+import { Repository } from 'typeorm';
+import { AddBalanceDto } from './dto/add-balance.dto';
 
 @Injectable()
 export class ClientService {
-  create(createClientDto: CreateClientDto) {
-    return 'This action adds a new client';
-  }
+  constructor(
+    @Inject('CLIENT_REPOSITORY')
+    private clientRepository: Repository<Client>,
+  ) {}
 
   findAll() {
-    return `This action returns all client`;
+    return this.clientRepository.find({
+      relations: { transfers: true, deposits: true },
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} client`;
+  async findOne(id: number) {
+    const c = await this.clientRepository
+      .createQueryBuilder('client')
+      .leftJoinAndSelect('client.transfers', 'transfers')
+      .leftJoinAndSelect('transfers.receiver', 'receiver')
+      .leftJoinAndSelect('client.deposits', 'deposits')
+      .leftJoinAndSelect('deposits.giver', 'giver')
+
+      .where('client.id = :id', { id })
+      .getOne();
+
+    if (!c) {
+      throw new HttpException('Client not found', 404);
+    }
+
+    return c;
   }
 
-  update(id: number, updateClientDto: UpdateClientDto) {
-    return `This action updates a #${id} client`;
+  async findOneByName(name: string) {
+    const c = await this.clientRepository
+      .createQueryBuilder('client')
+      .leftJoinAndSelect('client.transfers', 'transfers')
+      .leftJoinAndSelect('transfers.receiver', 'receiver')
+      .leftJoinAndSelect('client.deposits', 'deposits')
+      .leftJoinAndSelect('deposits.giver', 'giver')
+      .where('client.name = :name', { name })
+      .getOne();
+
+    if (!c) {
+      throw new HttpException('Client not found', 404);
+    }
+
+    return c;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} client`;
+  async addBalance(addBalanceDto: AddBalanceDto) {
+    const c = await this.findOne(addBalanceDto.clientId);
+
+    c.balance += addBalanceDto.balance;
+
+    return c.save();
   }
 }
