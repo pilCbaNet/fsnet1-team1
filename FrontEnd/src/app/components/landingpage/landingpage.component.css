@@ -1,0 +1,16 @@
+.nuestros-servicios {
+  background-color: #f1f3fe;
+}
+
+.nuestros-servicios .container {
+  max-width: 900px;
+}
+
+.nuestros-servicios .card {
+  border: none;
+  border-radius: 1.7rem;
+}
+
+.nuestros-servicios img {
+  height: 8rem;
+}
