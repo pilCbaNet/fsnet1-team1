@@ -14,7 +14,7 @@ import { ToastComponent } from './components/toast/toast.component';
 import { ToasterComponent } from './components/toast/toaster.component';
 import { UltimosMovimientosComponent } from './components/ultimos-movimientos/ultimos-movimientos.component';
 import { HomeComponent } from './components/home/home.component';
-import { DetalleMovimientoComponent } from './components/detalle-movimiento/detalle-movimiento.component';
+import { DetalleMovimientoComponent } from './components/ultimos-movimientos/detalle-movimiento/detalle-movimiento.component';
 
 @NgModule({
   declarations: [
