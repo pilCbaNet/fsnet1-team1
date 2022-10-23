@@ -12,11 +12,9 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastComponent } from './components/toast/toast.component';
 import { ToasterComponent } from './components/toast/toaster.component';
-import { UltimosMovimientosComponent } from './pages/ultimos-movimientos/ultimos-movimientos.component';
-import { HomeComponent } from './pages/home/home.component';
-import { PagesComponent } from './pages/pages.component';
-import { DetalleMovimientoComponent } from './pages/ultimos-movimientos/components/detalle-movimiento/detalle-movimiento.component';
-
+import { UltimosMovimientosComponent } from './components/ultimos-movimientos/ultimos-movimientos.component';
+import { HomeComponent } from './components/home/home.component';
+import { DetalleMovimientoComponent } from './components/detalle-movimiento/detalle-movimiento.component';
 
 @NgModule({
   declarations: [
@@ -31,11 +29,9 @@ import { DetalleMovimientoComponent } from './pages/ultimos-movimientos/componen
     UltimosMovimientosComponent,
     DetalleMovimientoComponent,
     HomeComponent,
-    PagesComponent
   ],
   imports: [
-
-  BrowserModule,
+    BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,

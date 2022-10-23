@@ -1,0 +1,81 @@
+/* .wallet-container {
+} */
+
+.page-title {
+    text-align: left;
+}
+
+.fa-user {
+    float: right;
+}
+
+.fa-align-left {
+    margin-right: 15px;
+}
+
+.amount-box img {
+    width: 50px;
+}
+
+.amount {
+    font-size: 35px;
+}
+
+.amount-box p {
+    margin-top: 10px;
+    margin-bottom: -10px;
+}
+
+.btn-group {
+    margin: 20px 0;
+}
+
+.btn-group .btn {
+    margin: 8px;
+    border-radius: 20px !important;
+    font-size: 12px;
+}
+
+.txn-history {
+    text-align: left;
+}
+
+.txn-list {
+    background-color: #fff;
+    padding: 12px 10px;
+    color: #777;
+    font-size: 14px;
+    margin: 7px 0;
+}
+
+.retiro {
+    color: red;
+    float: right;
+}
+
+.deposito {
+    color: green;
+    float: right;
+
+}
+
+.footer-menu {
+    margin: 20px -20px 0;
+    bottom: 0;
+    border-top: 1px solid #ccc;
+    padding: 10px 10px 0;
+}
+
+@media screen and (max-width: 800px) {
+    .wallet-container {
+        height: 115%;
+        bottom: 20px;
+        margin-top: 100px;
+    }
+
+}
+
+html,
+body {
+    height: 100%;
+}
