@@ -20,12 +20,12 @@ export class TokenService {
     localStorage.setItem(TOKEN, token);
   }
 
-  getToken(): string {
-    return localStorage.getItem(TOKEN) || "";
+  getToken(): string | null {
+    return localStorage.getItem(TOKEN);
   }
 
   getName(): string {
-    return localStorage.getItem(NAME) || "";
+    return localStorage.getItem(NAME) || '';
   }
 
   isAuthenticated(): boolean {

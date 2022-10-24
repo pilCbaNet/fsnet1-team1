@@ -20,8 +20,12 @@ export class TransactionsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.clientService.findClientById(this.ts.getClientId()).subscribe((c) => {
-      this.client = c;
-    });
+    if (this.ts.isAuthenticated()) {
+      this.clientService
+        .findClientById(this.ts.getClientId())
+        .subscribe((c) => {
+          this.client = c;
+        });
+    }
   }
 }
