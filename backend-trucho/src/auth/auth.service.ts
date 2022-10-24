@@ -34,6 +34,7 @@ export class AuthService {
       const response = {
         userId: u.id,
         clientId: u.client.id,
+        name: u.client.name,
         username,
         token,
       };

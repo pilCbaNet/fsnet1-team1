@@ -30,6 +30,7 @@ export class RegisterComponent {
   ) {
     this.registerForm = this.formBuilder.group({
       username: ['', Validators.required],
+      name: ['', Validators.required],
       password: ['', Validators.required],
     });
   }
@@ -54,7 +55,7 @@ export class RegisterComponent {
           this.router.navigateByUrl('/login');
         },
         error: (err) => {
-          this.toastService.showToast(':(', err.message, EventTypes.Error);
+          this.toastService.showToast(':(', err.error.message, EventTypes.Error);
           this.registerForm.reset();
         },
       });

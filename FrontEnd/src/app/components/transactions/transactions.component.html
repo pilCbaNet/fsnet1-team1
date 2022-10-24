@@ -7,11 +7,11 @@
     <div class="amount-box text-center">
       <img src="../../../assets/wallet.png" alt="wallet" />
       <p>Balance</p>
-      <p class="amount">$123</p>
+      <p class="amount">{{client?.balance}}</p>
     </div>
 
     <div class="btn-group text-center">
-      <button type="button" class="btn btn-outline-dark">Agregar dinero</button>
+      <button type="button" class="btn btn-outline-dark" (click)="addAmount(100)">Agregar dinero</button>
       <button type="button" class="btn btn-outline-dark">Retirar dinero</button>
     </div>
 
