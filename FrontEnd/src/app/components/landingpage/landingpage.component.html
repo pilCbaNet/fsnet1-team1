@@ -1,3 +1,83 @@
-<app-navbar></app-navbar>
-<p>Hola numero 2</p>
-<app-footer></app-footer>
+<!-- Main Section -->
+<main class="container">
+  <div class="row py-5">
+    <div class="col-md-6 my-auto">
+      <h1>Obtén tus criptomonedas</h1>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, qui
+        voluptates! Eos voluptas earum maxime blanditiis nisi commodi, quaerat
+        beatae.
+      </p>
+      <div class="btn-group" role="group">
+        <button class="btn btn-light" [routerLink]="['/login']">
+          Iniciar sesión
+        </button>
+        <button class="btn btn-primary text-light" [routerLink]="['/register']">
+          Registrarse
+        </button>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <img
+        [src]="'assets/woman-piggybank.png'"
+        alt="Woman piggybank"
+        class="img-fluid"
+      />
+    </div>
+  </div>
+</main>
+<!-- Nuestros Servicios -->
+<section class="nuestros-servicios p-5">
+  <div class="container">
+    <div class="row text-center g-4">
+      <div class="col-lg-3 col-sm-6">
+        <div class="card p-4">
+          <img
+            class="card-img-top"
+            [src]="'assets/icons/pesos.svg'"
+            alt="Icono de transacciones en pesos"
+          />
+          <div class="card-body text-center">
+            <h6 class="card-title">Depósitos y retiros en pesos</h6>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-sm-6">
+        <div class="card p-4">
+          <img
+            class="card-img-top"
+            [src]="'assets/icons/transferencias.svg'"
+            alt="Icono de transferencias en general"
+          />
+          <div class="card-body text-center">
+            <h6 class="card-title">Transferencias de pesos y criptomonedas</h6>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-sm-6">
+        <div class="card p-4">
+          <img
+            class="card-img-top"
+            [src]="'assets/icons/cotizaciones.svg'"
+            alt="Icono de cotizaciones"
+          />
+          <div class="card-body text-center">
+            <h6 class="card-title">Cotizaciones vigentes</h6>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-sm-6">
+        <div class="card p-4">
+          <img
+            class="card-img-top"
+            [src]="'assets/icons/crypto.svg'"
+            alt="Icono de criptomonedas"
+          />
+          <div class="card-body text-center">
+            <h6 class="card-title">Compra y venta de criptomonedas</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
