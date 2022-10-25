@@ -1,0 +1,6 @@
+<div class="list">
+  <p *ngFor="let t of transactions">
+    {{ t.giver ? t.giver.name : name }} pago {{ t.amount }} a
+    {{ t.receiver ? t.receiver.name : name }}
+  </p>
+</div>

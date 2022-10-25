@@ -1,37 +1,37 @@
-<p>transactions works!</p>
-
-<body>
-  <div class="wallet-container text-center">
-    <p>Mi billetera</p>
-
-    <div class="amount-box text-center">
-      <img src="../../../assets/wallet.png" alt="wallet" />
-      <p>Balance</p>
-      <p class="amount">{{client?.balance}}</p>
+<div class="container-fluid text-center">
+  <div class="row">
+    <div class="col">
+      <p class="fw-bold text-decoration-underline">Depositos</p>
+      <app-transaction-list
+        [transactions]="client!.deposits"
+      ></app-transaction-list>
     </div>
+    <div class="col">
+      <p>Mi billetera</p>
+      <div class="amount-box text-center">
+        <img src="../../../assets/wallet.png" alt="wallet" />
+        <p>Balance</p>
+        <p class="amount">{{ client.balance }}</p>
+      </div>
 
-    <div class="btn-group text-center">
-      <button type="button" class="btn btn-outline-dark" (click)="addAmount(100)">Agregar dinero</button>
-      <button type="button" class="btn btn-outline-dark">Retirar dinero</button>
+      <div class="btn-group text-center">
+        <button
+          type="button"
+          class="btn btn-outline-dark"
+          (click)="addAmount(100)"
+        >
+          Agregar dinero
+        </button>
+        <button type="button" class="btn btn-outline-dark">
+          Retirar dinero
+        </button>
+      </div>
     </div>
-
-    <div class="txn-history">
-      <p class="text-center"><b>Historial</b></p>
-      <p class="txn-list">
-        Retiro de [cantidad]<span class="retiro">-$10000</span>
-      </p>
-
-      <p class="txn-list">
-        Depósito de [cantidad]<span class="deposito">+$15000</span>
-      </p>
-
-      <p class="txn-list">
-        Retiro de [cantidad]<span class="retiro">-$3000</span>
-      </p>
-
-      <p class="txn-list">
-        Depósito de [cantidad]<span class="deposito">+$10000</span>
-      </p>
+    <div class="col">
+      <p class="fw-bold text-decoration-underline">Transferencias</p>
+      <app-transaction-list
+        [transactions]="client!.transfers"
+      ></app-transaction-list>
     </div>
   </div>
-</body>
+</div>

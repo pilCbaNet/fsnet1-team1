@@ -9,12 +9,12 @@ import { TokenService } from './../../services/token.service';
   styleUrls: ['./transactions.component.css'],
 })
 export class TransactionsComponent implements OnInit {
-  client?: Client;
+  client: Client = { balance: 0, deposits: [], transfers: [], name: '' };
 
   constructor(private clientService: ClientService, private ts: TokenService) {}
 
   addAmount(amount: number) {
-    this.clientService.addBalance(this.client!.id, amount).subscribe((c) => {
+    this.clientService.addBalance(this.client!.id!, amount).subscribe((c) => {
       this.client!.balance = c.balance;
     });
   }

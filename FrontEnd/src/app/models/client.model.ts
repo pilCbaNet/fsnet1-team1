@@ -1,7 +1,7 @@
-import { Transaction } from './transaccion.model';
+import { Transaction } from './transaction.model';
 
 export interface Client {
-  id: number;
+  id?: number;
   name: string;
 
   balance: number;

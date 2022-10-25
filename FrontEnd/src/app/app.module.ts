@@ -9,12 +9,15 @@ import { RegisterComponent } from './components/register/register.component';
 import { LandingpageComponent } from './components/landingpage/landingpage.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ToastComponent } from './components/toast/toast.component';
 import { ToasterComponent } from './components/toast/toaster.component';
 import { UltimosMovimientosComponent } from './components/ultimos-movimientos/ultimos-movimientos.component';
 import { HomeComponent } from './components/home/home.component';
 import { DetalleMovimientoComponent } from './components/ultimos-movimientos/detalle-movimiento/detalle-movimiento.component';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { TransactionListComponent } from './components/transactions/transaction-list/transaction-list.component';
+import { TransactionsComponent } from './components/transactions/transactions.component';
 
 @NgModule({
   declarations: [
@@ -29,15 +32,19 @@ import { DetalleMovimientoComponent } from './components/ultimos-movimientos/det
     UltimosMovimientosComponent,
     DetalleMovimientoComponent,
     HomeComponent,
+    TransactionListComponent,
+    TransactionsComponent
   ],
   imports: [
-    BrowserModule,
+  BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

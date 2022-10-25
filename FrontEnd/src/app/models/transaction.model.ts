@@ -5,9 +5,9 @@ export interface Transaction {
 
   amount: number;
 
-  giver: Client;
+  giver?: Client;
 
-  receiver: Client;
+  receiver?: Client;
 
   createdOn: Date;
 }
