@@ -18,6 +18,7 @@ import { DetalleMovimientoComponent } from './components/ultimos-movimientos/det
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { TransactionListComponent } from './components/transactions/transaction-list/transaction-list.component';
 import { TransactionsComponent } from './components/transactions/transactions.component';
+import { QuienesSomosComponent } from './components/quienes-somos/quienes-somos.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { TransactionsComponent } from './components/transactions/transactions.co
     DetalleMovimientoComponent,
     HomeComponent,
     TransactionListComponent,
-    TransactionsComponent
+    TransactionsComponent,
+    QuienesSomosComponent
   ],
   imports: [
   BrowserModule,

@@ -8,6 +8,7 @@ import { HomeComponent } from './components/home/home.component';
 import { UltimosMovimientosComponent } from './components/ultimos-movimientos/ultimos-movimientos.component';
 import { TransactionsComponent } from './components/transactions/transactions.component';
 import { NoAuthGuard } from './guards/no-auth.guard';
+import { QuienesSomosComponent } from './components/quienes-somos/quienes-somos.component';
 
 const routes: Routes = [
   { path: '', component: LandingpageComponent, canActivate: [NoAuthGuard] },
@@ -18,6 +19,7 @@ const routes: Routes = [
     children: [
       { path: '', component: TransactionsComponent },
       { path: 'ultimos-movimientos', component: UltimosMovimientosComponent },
+      { path: 'quienes-somos', component: QuienesSomosComponent},
       { path: '**', redirectTo: 'ultimos-movimientos' },
     ],
   },
