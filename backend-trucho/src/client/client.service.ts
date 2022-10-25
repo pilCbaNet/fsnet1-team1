@@ -23,13 +23,23 @@ export class ClientService {
       .leftJoinAndSelect('transfers.receiver', 'receiver')
       .leftJoinAndSelect('client.deposits', 'deposits')
       .leftJoinAndSelect('deposits.giver', 'giver')
-
       .where('client.id = :id', { id })
       .getOne();
 
     if (!c) {
       throw new HttpException('Client not found', 404);
     }
+
+    //query mal hecha, solucion vaga
+    c.transfers = c.transfers.map((t) => {
+      t.receiver.balance = undefined;
+      return t;
+    });
+
+    c.deposits = c.deposits.map((t) => {
+      t.giver.balance = undefined;
+      return t;
+    });
 
     return c;
   }

@@ -10,7 +10,6 @@ async function bootstrap() {
     .setTitle('BackTrucheli')
     .setDescription('Backtrucheli')
     .setVersion('1.0')
-    .addTag('asd')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
