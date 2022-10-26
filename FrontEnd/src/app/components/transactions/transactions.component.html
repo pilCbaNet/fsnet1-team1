@@ -18,12 +18,18 @@
         <button
           type="button"
           class="btn btn-outline-dark"
-          (click)="addAmount(100)"
+          data-bs-toggle="modal"
+          data-bs-target="#addAmountModal"
         >
           Agregar dinero
         </button>
-        <button type="button" class="btn btn-outline-dark">
-          Retirar dinero
+        <button
+          type="button"
+          class="btn btn-outline-dark"
+          data-bs-toggle="modal"
+          data-bs-target="#transferBalanceModal"
+        >
+          Enviar dinero
         </button>
       </div>
     </div>
@@ -35,3 +41,11 @@
     </div>
   </div>
 </div>
+<app-add-balance-modal
+  [modalId]="'addAmountModal'"
+  (amountSend)="addAmount($event)"
+></app-add-balance-modal>
+<app-transfer-balance-modal
+  [modalId]="'transferBalanceModal'"
+  (transferSend)="transfer($event)"
+></app-transfer-balance-modal>

@@ -6,7 +6,7 @@ import {
   HttpInterceptor,
   HttpErrorResponse,
 } from '@angular/common/http';
-import { catchError, Observable, of } from 'rxjs';
+import { catchError, Observable, of, throwError } from 'rxjs';
 import { TokenService } from '../services/token.service';
 import { Router } from '@angular/router';
 
@@ -37,8 +37,7 @@ export class AuthInterceptor implements HttpInterceptor {
     if (err.status === 401 || err.status === 403) {
       this.tokenService.logout();
       this.router.navigate(['/login']);
-      return of(err.message);
     }
-    return of(err);
+    return throwError(() => err);
   }
 }

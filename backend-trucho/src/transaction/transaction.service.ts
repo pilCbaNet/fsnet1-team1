@@ -15,7 +15,7 @@ export class TransactionService {
   async create(createTransactionDto: CreateTransactionDto) {
     if (createTransactionDto.giverName === createTransactionDto.receiverName) {
       throw new HttpException(
-        'cannot make a trasaction to the same client',
+        'No puedes hacer una transferencia a la misma cuenta',
         400,
       );
     }
@@ -25,18 +25,27 @@ export class TransactionService {
     );
 
     if (giver.balance < createTransactionDto.amount) {
-      throw new HttpException('giver do not have enough balance', 400);
+      throw new HttpException('No tienes suficiente dinero', 400);
     }
 
     const receiver = await this.clientService.findOneByName(
       createTransactionDto.receiverName,
     );
 
+    //make a sql transaccion
     giver.balance -= createTransactionDto.amount;
     receiver.balance += createTransactionDto.amount;
 
     const g = await giver.save();
     const r = await receiver.save();
+
+    //better selects
+    g.balance = undefined;
+    g.transfers = undefined;
+    g.deposits = undefined;
+    r.balance = undefined;
+    r.transfers = undefined;
+    r.deposits = undefined;
 
     const transaction = {
       amount: createTransactionDto.amount,
@@ -46,11 +55,6 @@ export class TransactionService {
 
     return this.transactionRepository.save(transaction);
   }
-
-  findAll() {
-    return `This action returns all transaction`;
-  }
-
   async findOne(id: number) {
     const t = await this.transactionRepository
       .createQueryBuilder('transaction')

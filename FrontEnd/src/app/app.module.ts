@@ -19,6 +19,8 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { TransactionListComponent } from './components/transactions/transaction-list/transaction-list.component';
 import { TransactionsComponent } from './components/transactions/transactions.component';
 import { QuienesSomosComponent } from './components/quienes-somos/quienes-somos.component';
+import { AddBalanceModalComponent } from './components/add-balance-modal/add-balance-modal.component';
+import { TransferBalanceModalComponent } from './components/transfer-balance-modal/transfer-balance-modal.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { QuienesSomosComponent } from './components/quienes-somos/quienes-somos.
     HomeComponent,
     TransactionListComponent,
     TransactionsComponent,
-    QuienesSomosComponent
+    QuienesSomosComponent,
+    AddBalanceModalComponent,
+    TransferBalanceModalComponent
   ],
   imports: [
   BrowserModule,

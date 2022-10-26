@@ -1,0 +1,64 @@
+<!-- Modal -->
+<div
+  class="modal fade"
+  [id]="modalId"
+  tabindex="-1"
+  (hidden.bs.modal)="reset()"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Enviar dinero</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="transferForm">
+          <label for="receiver" class="form-label">Usuario destinatario:</label>
+          <div class="input-group mb-3">
+            <span class="input-group-text"><i class="bi bi-person"></i></span>
+            <input
+              id="receiver"
+              type="text"
+              class="form-control"
+              placeholder="Destinatario"
+              formControlName="receiverName"
+            />
+          </div>
+
+          <label for="amount" class="form-label">Cantidad a enviar:</label>
+          <div class="input-group mb-3">
+            <span class="input-group-text"
+              ><i class="bi bi-currency-dollar"></i
+            ></span>
+            <input
+              id="amount"
+              type="number"
+              class="form-control"
+              placeholder="Cantidad"
+              formControlName="amount"
+            />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-dismiss="modal"
+          [disabled]="transferForm.invalid"
+          (click)="send()"
+        >
+          Enviar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

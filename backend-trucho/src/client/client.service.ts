@@ -27,7 +27,7 @@ export class ClientService {
       .getOne();
 
     if (!c) {
-      throw new HttpException('Client not found', 404);
+      throw new HttpException('Cliente no encontrado', 404);
     }
 
     //query mal hecha, solucion vaga
@@ -55,7 +55,7 @@ export class ClientService {
       .getOne();
 
     if (!c) {
-      throw new HttpException('Client not found', 404);
+      throw new HttpException('Cliente no encontrado', 404);
     }
 
     return c;

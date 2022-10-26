@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
           this.router.navigateByUrl('/');
         },
         error: (err) => {
-          this.toastService.showToast(':(', err.message, EventTypes.Error);
+          this.toastService.showToast(':(', err.error.message, EventTypes.Error);
           this.loginForm.reset();
           this.removeValidate();
         },
@@ -58,6 +58,5 @@ export class LoginComponent implements OnInit {
     this.formHTML['nativeElement'].classList.remove('was-validated');
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 }

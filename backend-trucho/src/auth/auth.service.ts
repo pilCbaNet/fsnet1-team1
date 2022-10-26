@@ -42,7 +42,7 @@ export class AuthService {
       return response;
     }
 
-    throw new HttpException('Username or password is incorrect', 400);
+    throw new HttpException('Usuario o contraseña incorrecta', 400);
   }
 
   async register(userDto: CreateUserDto) {
@@ -54,13 +54,13 @@ export class AuthService {
       where: { username },
     });
 
-    if (u) throw new HttpException('Username is already in use', 400);
+    if (u) throw new HttpException('El nombre de usuario ya esta en uso', 400);
 
     const c = await this.clientRepository.findOne({
       where: { name },
     });
 
-    if (c) throw new HttpException('name is already in use', 400);
+    if (c) throw new HttpException('El nombre ya esta en uso', 400);
 
     const hashedPassword = await hash(password, 10);
 
