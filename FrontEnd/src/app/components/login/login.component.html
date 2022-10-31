@@ -8,6 +8,7 @@
   >
     <h3 class="h3 mb-3 fw-normal text-center">Bienvenido :D</h3>
     <div class="form-floating has-validation">
+      
       <input
         type="text"
         class="form-control"
@@ -17,6 +18,9 @@
         required
       />
       <label for="username">Nombre de usuario</label>
+      <div class="invalid-feedback mb-1">
+        Ingrese un nombre de usuario
+      </div>
     </div>
     <div class="form-floating has-validation">
       <input
@@ -28,8 +32,11 @@
         required
       />
       <label for="password">Contraseña</label>
+      <div class="invalid-feedback mb-1">
+        Ingrese contraseña
+      </div>
     </div>
-    <button class="w-100 btn btn-lg btn-success" type="submit">
+    <button class="w-100 btn btn-lg btn-success mt-2" type="submit">
       Iniciar sesion
     </button>
   </form>

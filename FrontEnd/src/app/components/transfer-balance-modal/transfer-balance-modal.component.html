@@ -53,7 +53,7 @@
           type="button"
           class="btn btn-primary"
           data-bs-dismiss="modal"
-          [disabled]="transferForm.invalid"
+          [disabled]="transferForm.invalid || amount > balance"
           (click)="send()"
         >
           Enviar

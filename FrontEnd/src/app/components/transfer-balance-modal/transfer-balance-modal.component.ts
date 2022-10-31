@@ -27,6 +27,10 @@ export class TransferBalanceModalComponent implements OnInit {
     });
   }
 
+  get amount(){
+    return this.transferForm.get("amount")?.value
+  }
+
   ngOnInit(): void {}
 
   reset() {
