@@ -20,8 +20,10 @@ export class ClientService {
     const c = await this.clientRepository
       .createQueryBuilder('client')
       .leftJoinAndSelect('client.transfers', 'transfers')
+      .orderBy('transfers.createdOn', 'DESC')
       .leftJoinAndSelect('transfers.receiver', 'receiver')
       .leftJoinAndSelect('client.deposits', 'deposits')
+      .orderBy('deposits.createdOn', 'DESC')
       .leftJoinAndSelect('deposits.giver', 'giver')
       .where('client.id = :id', { id })
       .getOne();
@@ -48,8 +50,10 @@ export class ClientService {
     const c = await this.clientRepository
       .createQueryBuilder('client')
       .leftJoinAndSelect('client.transfers', 'transfers')
+      .orderBy('transfers.createdOn', 'DESC')
       .leftJoinAndSelect('transfers.receiver', 'receiver')
       .leftJoinAndSelect('client.deposits', 'deposits')
+      .orderBy('deposits.createdOn', 'DESC')
       .leftJoinAndSelect('deposits.giver', 'giver')
       .where('client.name = :name', { name })
       .getOne();
@@ -57,6 +61,17 @@ export class ClientService {
     if (!c) {
       throw new HttpException('Cliente no encontrado', 404);
     }
+
+    //query mal hecha, solucion vaga
+    c.transfers = c.transfers.map((t) => {
+      t.receiver.balance = undefined;
+      return t;
+    });
+
+    c.deposits = c.deposits.map((t) => {
+      t.giver.balance = undefined;
+      return t;
+    });
 
     return c;
   }

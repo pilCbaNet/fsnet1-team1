@@ -19,7 +19,8 @@ const routes: Routes = [
     children: [
       { path: '', component: TransactionsComponent },
       { path: 'ultimos-movimientos', component: UltimosMovimientosComponent },
-      { path: '**', redirectTo: 'ultimos-movimientos' },
+      { path: 'quienes-somos', component: QuienesSomosComponent },
+      { path: '**', redirectTo: '' },
     ],
   },
   { path: 'login', component: LoginComponent, canActivate: [NoAuthGuard] },
@@ -28,7 +29,6 @@ const routes: Routes = [
     component: RegisterComponent,
     canActivate: [NoAuthGuard],
   },
-  { path: 'quienes-somos', component: QuienesSomosComponent },
   { path: '**', redirectTo: '' },
 ];
 

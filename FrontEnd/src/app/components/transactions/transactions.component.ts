@@ -32,7 +32,7 @@ export class TransactionsComponent implements OnInit {
     this.transferService.postTransfer(transferDto).subscribe({
       next: (t) => {
         this.client.balance -= t.amount;
-        this.client.transfers.push(t);
+        this.client.transfers.unshift(t)
 
         this.toastService.showToast(':D', `La transferencia fue exitosa`, EventTypes.Success);
       },
