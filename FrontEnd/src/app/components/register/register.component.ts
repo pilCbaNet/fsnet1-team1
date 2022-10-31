@@ -45,6 +45,7 @@ export class RegisterComponent {
 
   register() {
     if (this.registerForm.valid) {
+      console.log(this.registerForm.value)
       this.authService.register(this.registerForm.value).subscribe({
         next: (res) => {
           this.toastService.showToast(

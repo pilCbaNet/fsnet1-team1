@@ -5,7 +5,7 @@ export class CreateTransactionDto {
   @ApiProperty()
   @IsNotEmpty({ message: 'amount cannot be empty' })
   @IsNumber({}, { message: 'amount has to be a number' })
-  @Min(1, { message: 'amount has to be greater or equal than 1' })
+  @Min(1, { message: 'La cantidad tiene que ser igual o mayor a 1' })
   amount: number;
 
   @ApiProperty()

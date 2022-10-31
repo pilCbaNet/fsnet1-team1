@@ -46,6 +46,7 @@
   (amountSend)="addAmount($event)"
 ></app-add-balance-modal>
 <app-transfer-balance-modal
+  [balance]="client.balance"
   [modalId]="'transferBalanceModal'"
   (transferSend)="transfer($event)"
 ></app-transfer-balance-modal>

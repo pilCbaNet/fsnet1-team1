@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
             'Usuario correcto',
             EventTypes.Success
           );
-          this.router.navigateByUrl('/');
+          this.router.navigateByUrl('/home');
         },
         error: (err) => {
           this.toastService.showToast(':(', err.error.message, EventTypes.Error);

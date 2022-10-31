@@ -11,6 +11,8 @@ import { TransferDto } from './../../models/transfer-dto.model';
 export class TransferBalanceModalComponent implements OnInit {
   @Input()
   modalId!: string;
+  @Input()
+  balance: number = 0;
 
   @Output()
   transferSend: EventEmitter<TransferDto> = new EventEmitter();
