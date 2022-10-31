@@ -1,12 +1,12 @@
 <div class="container-fluid text-center">
   <div class="row">
-    <div class="col">
+    <div class="col-lg col-md-6">
       <p class="fw-bold text-decoration-underline">Depositos</p>
       <app-transaction-list
         [transactions]="client!.deposits"
       ></app-transaction-list>
     </div>
-    <div class="col">
+    <div class="col-lg-3 col-md-6">
       <p>Mi billetera</p>
       <div class="amount-box text-center">
         <img src="../../../assets/wallet.png" alt="wallet" />
@@ -33,7 +33,7 @@
         </button>
       </div>
     </div>
-    <div class="col">
+    <div class="col-lg col-md-6">
       <p class="fw-bold text-decoration-underline">Transferencias</p>
       <app-transaction-list
         [transactions]="client!.transfers"
