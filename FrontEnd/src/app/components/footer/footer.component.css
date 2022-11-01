@@ -1,13 +1,20 @@
 
 footer {
-  display: flex;
-  justify-content: space-around;
-  position: absolute;
+ position: absolute;
   bottom: 0;
   width: 100%;
-  background-color: rgb(140, 177, 255);
+  background-color: rgba(235, 235, 235, 0.801);
   color: rgb(0, 0, 0);
 }
-.locales {
+
+.redes {
   display: flex;
+ justify-content: center;
+}
+.iconos {
+  padding: 10px;
+}
+
+.bi {
+  font-size: 2em;
 }
