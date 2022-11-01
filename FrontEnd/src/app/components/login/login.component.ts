@@ -23,8 +23,8 @@ export class LoginComponent implements OnInit {
     private router: Router
   ) {
     this.loginForm = this.formBuilder.group({
-      username: ['', [Validators.required]],
-      password: ['', [Validators.required]],
+      username: ['', [Validators.required, Validators.minLength(3)]],
+      password: ['', [Validators.required, Validators.minLength(3)]],
     });
   }
 
@@ -42,21 +42,11 @@ export class LoginComponent implements OnInit {
         error: (err) => {
           this.toastService.showToast(':(', err.error.message, EventTypes.Error);
           this.loginForm.reset();
-          this.removeValidate();
         },
       });
-    } else {
-      this.validate();
     }
   }
 
-  //muestra estilos de validacion de bootstrap
-  validate() {
-    this.formHTML['nativeElement'].classList.add('was-validated');
-  }
-  removeValidate() {
-    this.formHTML['nativeElement'].classList.remove('was-validated');
-  }
 
   ngOnInit(): void {}
 }

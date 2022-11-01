@@ -29,22 +29,17 @@ export class RegisterComponent {
     private authService: AuthService
   ) {
     this.registerForm = this.formBuilder.group({
-      username: ['', Validators.required],
-      name: ['', [Validators.required]],
+      username: ['', [Validators.required, Validators.minLength(3)]],
+      name: ['', [Validators.required, Validators.minLength(3)]],
       email:['', [Validators.required, Validators.email]],
       phone:['', [Validators.pattern("\\d{8,10}")]],
-      password: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(3)]],
+      confirmPassword:['', Validators.required]
+    },
+    {
+      validator: ConfirmPasswordValidator.MatchPassword,
     });
   }
-
-  //muestra estilos de validacion de bootstrap
-  validate() {
-    this.formHTML['nativeElement'].classList.add('was-validated');
-  }
-  removeValidate() {
-    this.formHTML['nativeElement'].classList.remove('was-validated');
-  }
-
   register() {
     if (this.registerForm.valid) {
       console.log(this.registerForm.value)
@@ -62,8 +57,26 @@ export class RegisterComponent {
           this.registerForm.reset();
         },
       });
+    }
+  }
+}
+
+
+export class ConfirmPasswordValidator {
+  /**
+   * Check matching password with confirm password
+   * @param control AbstractControl
+   */
+  static MatchPassword(control: AbstractControl) {
+    const password = control.get('password')!.value;
+
+    const confirmPassword = control.get('confirmPassword')!.value;
+
+    if (password !== confirmPassword) {
+      control.get('confirmPassword')!.setErrors({ ConfirmPassword: true });
+      return
     } else {
-      this.validate();
+      return null;
     }
   }
 }

@@ -3,12 +3,10 @@
     [formGroup]="loginForm"
     (ngSubmit)="login()"
     #form
-    class="needs-validation"
     novalidate
   >
     <h3 class="h3 mb-3 fw-normal text-center">Bienvenido :D</h3>
-    <div class="form-floating has-validation">
-      
+    <div class="form-floating has-validation">  
       <input
         type="text"
         class="form-control"
@@ -17,10 +15,10 @@
         formControlName="username"
         required
       />
-      <label for="username">Nombre de usuario</label>
-      <div class="invalid-feedback mb-1">
+      <div class="invalid mb-1">
         Ingrese un nombre de usuario
       </div>
+      <label for="username">Nombre de usuario</label>
     </div>
     <div class="form-floating has-validation">
       <input
@@ -31,12 +29,12 @@
         formControlName="password"
         required
       />
-      <label for="password">Contraseña</label>
-      <div class="invalid-feedback mb-1">
+      <div class="invalid mb-1">
         Ingrese contraseña
       </div>
+      <label for="password">Contraseña</label>
     </div>
-    <button class="w-100 btn btn-lg btn-success mt-2" type="submit">
+    <button class="w-100 btn btn-lg btn-success mt-2" type="submit" [disabled]="loginForm.invalid">
       Iniciar sesion
     </button>
   </form>
