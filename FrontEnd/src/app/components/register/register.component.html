@@ -17,23 +17,43 @@
         required
       />
       <label for="username">Nombre de usuario</label>
-      <div class="invalid-feedback mb-1">
-        Ingrese un nombre de usuario
-      </div>
+      <div class="invalid-feedback mb-1">Ingrese un nombre de usuario</div>
     </div>
     <div class="form-floating has-validation name">
       <input
         type="text"
-        class="form-control"
+        class="form-control middle"
         id="name"
         placeholder="Nombre"
         formControlName="name"
         required
       />
       <label for="name">Nombre</label>
-      <div class="invalid-feedback mb-1">
-        Ingrese un nombre
-      </div>
+      <div class="invalid-feedback mb-1">Ingrese un nombre</div>
+    </div>
+    <div class="form-floating has-validation name">
+      <input
+        type="email"
+        class="form-control middle"
+        placeholder="Email"
+        formControlName="email"
+        required
+      />
+      <label for="name">Email</label>
+      <div class="invalid-feedback mb-1">Ingrese un Email valido</div>
+    </div>
+    <div class="form-floating has-validation name">
+      <input
+        type="text"
+        class="form-control middle"
+        placeholder="Telefono"
+        formControlName="phone"
+        minlength="8"
+        maxlength="10"
+        required
+      />
+      <label for="name">Numero de telefono</label>
+      <div class="invalid-feedback mb-1">Ingrese un Numero valido</div>
     </div>
     <div class="form-floating has-validation password">
       <input
@@ -45,9 +65,7 @@
         required
       />
       <label for="password">Contraseña</label>
-      <div class="invalid-feedback mb-1">
-        Ingrese un nombre de usuario
-      </div>
+      <div class="invalid-feedback mb-1">Ingrese un nombre de usuario</div>
     </div>
     <button class="w-100 btn btn-lg btn-success mt-2" type="submit">
       Registrarse
