@@ -28,6 +28,7 @@
               placeholder="Destinatario"
               formControlName="receiverName"
             />
+            <div class="invalid mb-1">Ingrese destinatario valido, minimo 3 caracteres</div>
           </div>
 
           <label for="amount" class="form-label">Cantidad a enviar:</label>
@@ -42,6 +43,7 @@
               placeholder="Cantidad"
               formControlName="amount"
             />
+            <div class="invalid mb-1">Ingrese un Numero valido, no mayor al saldo disponible</div>
           </div>
         </form>
       </div>
@@ -53,7 +55,7 @@
           type="button"
           class="btn btn-primary"
           data-bs-dismiss="modal"
-          [disabled]="transferForm.invalid || amount > balance"
+          [disabled]="transferForm.invalid"
           (click)="send()"
         >
           Enviar

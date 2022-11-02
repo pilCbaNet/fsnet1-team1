@@ -28,21 +28,23 @@ export class RegisterComponent {
     private toastService: ToastService,
     private authService: AuthService
   ) {
-    this.registerForm = this.formBuilder.group({
-      username: ['', [Validators.required, Validators.minLength(3)]],
-      name: ['', [Validators.required, Validators.minLength(3)]],
-      email:['', [Validators.required, Validators.email]],
-      phone:['', [Validators.pattern("\\d{8,10}")]],
-      password: ['', [Validators.required, Validators.minLength(3)]],
-      confirmPassword:['', Validators.required]
-    },
-    {
-      validator: ConfirmPasswordValidator.MatchPassword,
-    });
+    this.registerForm = this.formBuilder.group(
+      {
+        username: ['', [Validators.required, Validators.minLength(3)]],
+        name: ['', [Validators.required, Validators.minLength(3)]],
+        email: ['', [Validators.required, Validators.email]],
+        phone: ['', [Validators.pattern('\\d{8,10}')]],
+        password: ['', [Validators.required, Validators.minLength(3)]],
+        confirmPassword: ['', Validators.required],
+      },
+      {
+        validator: ConfirmPasswordValidator.MatchPassword,
+      } as AbstractControlOptions
+    );
   }
   register() {
     if (this.registerForm.valid) {
-      console.log(this.registerForm.value)
+      console.log(this.registerForm.value);
       this.authService.register(this.registerForm.value).subscribe({
         next: (res) => {
           this.toastService.showToast(
@@ -53,14 +55,17 @@ export class RegisterComponent {
           this.router.navigateByUrl('/login');
         },
         error: (err) => {
-          this.toastService.showToast(':(', err.error.message, EventTypes.Error);
+          this.toastService.showToast(
+            ':(',
+            err.error.message,
+            EventTypes.Error
+          );
           this.registerForm.reset();
         },
       });
     }
   }
 }
-
 
 export class ConfirmPasswordValidator {
   /**
@@ -74,7 +79,7 @@ export class ConfirmPasswordValidator {
 
     if (password !== confirmPassword) {
       control.get('confirmPassword')!.setErrors({ ConfirmPassword: true });
-      return
+      return;
     } else {
       return null;
     }

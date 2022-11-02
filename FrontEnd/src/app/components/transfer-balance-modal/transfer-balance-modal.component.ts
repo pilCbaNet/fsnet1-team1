@@ -1,5 +1,13 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  AbstractControl,
+  AbstractControlOptions,
+  ValidatorFn,
+  ValidationErrors,
+} from '@angular/forms';
 import { TokenService } from 'src/app/services/token.service';
 import { TransferDto } from './../../models/transfer-dto.model';
 
@@ -21,14 +29,10 @@ export class TransferBalanceModalComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private tokenService: TokenService) {
     this.transferForm = this.fb.group({
-      amount: ['', Validators.required],
+      amount: ['', [Validators.required, this.amountValidator()]],
       giverName: [],
-      receiverName: ['', Validators.required],
+      receiverName: ['', [Validators.required, Validators.minLength(3)]],
     });
-  }
-
-  get amount(){
-    return this.transferForm.get("amount")?.value
   }
 
   ngOnInit(): void {}
@@ -40,5 +44,17 @@ export class TransferBalanceModalComponent implements OnInit {
   send() {
     this.transferForm.patchValue({ giverName: this.tokenService.getName() });
     this.transferSend.emit(this.transferForm.value);
+  }
+
+  amountValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value;
+
+      if (!value) {
+        return null;
+      }
+
+      return value > this.balance ? { passwordStrength: true } : null;
+    };
   }
 }
