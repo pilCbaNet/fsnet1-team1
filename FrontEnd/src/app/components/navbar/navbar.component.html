@@ -1,19 +1,20 @@
-<nav class="navbar navbar-expand-sm bg-light mb-5">
+<nav class="navbar navbar-expand-sm mb-5" style="background-color: #e7e7e7">
   <div class="container">
-    <a [routerLink]="['/home']" class="navbar-brand"
-      >Bienvenido a CryptoExchange {{ clientName }}</a
+    <a [routerLink]="['/home']" class="navbar-brand" style="color: #191919"
+      >Bienvenido a CryptoExchange: {{ clientName }}</a
     >
-    <a [routerLink]="['/home/quienes-somos']" class="fw-semibold text-dark"
+    <!-- <a [routerLink]="['/home/quienes-somos']" class="fw-semibold text-dark"
       >¿Quienes somos?</a
-    >
+    > -->
     <ul class="navbar-nav ms-auto">
       <li class="nav-item">
         <a
           href="#"
-          class="nav-link btn btn-primary text-light"
+          class="nav-link btn btn-primary text-light border-0"
+          style="background-color: cornflowerblue"
           (click)="logout()"
-          ><i class="bi bi-door-open-fill"></i></a
-        >
+          ><i class="bi bi-door-open-fill" style="color: #e7e7e7"></i
+        ></a>
       </li>
     </ul>
   </div>

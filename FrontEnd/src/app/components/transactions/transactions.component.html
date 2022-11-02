@@ -1,4 +1,4 @@
-<div class="container-fluid text-center">
+<div class="container-fluid text-center" style="color: #3c3c3b">
   <div class="row">
     <div class="col-lg col-md-6">
       <p class="fw-bold text-decoration-underline">Depositos</p>
@@ -6,7 +6,10 @@
         [transactions]="client!.deposits"
       ></app-transaction-list>
     </div>
-    <div class="col-lg-3 col-md-6">
+    <div
+      class="col-lg-3 col-md-6"
+      style="border-radius: 25px; background-color: #c1c1c1; padding-top: 20px"
+    >
       <p>Mi billetera</p>
       <div class="amount-box text-center">
         <img src="../../../assets/wallet.png" alt="wallet" />
