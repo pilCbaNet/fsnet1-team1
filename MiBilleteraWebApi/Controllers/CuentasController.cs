@@ -1,7 +1,9 @@
-﻿using MiBilleteraWebApi.Models;
+﻿using Entidades;
+//using MiBilleteraWebApi.Models; 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Negocio;
 using System.Data;
 using System.Linq;
 
@@ -21,13 +23,12 @@ namespace MiBilleteraWebApi.Controllers
             }
         }
         [HttpGet("{id}")]
-        public Cuenta GetById(int id)
+        public Cuenta? GetById(int id)
         {
             using (var db = new MiBilleteraContext())
             {
 
-                var cuentaCliente = db.Cuentas.Include(i => i.IdUsuarioNavigation).
-                FirstOrDefault(c => c.IdCuenta == id);
+                var cuentaCliente = new CuentaBC().ObtenerCuenta(db, id);
                 //var cuentaCliente = db.Cuentas.FirstOrDefault(c => c.IdCuenta == id);
                     return cuentaCliente;
              }

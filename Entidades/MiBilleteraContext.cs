@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace MiBilleteraWebApi.Models
+namespace Entidades
 {
     public partial class MiBilleteraContext : DbContext
     {

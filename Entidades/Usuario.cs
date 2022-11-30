@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MiBilleteraWebApi.Models
+namespace Entidades
 {
     public partial class Usuario
     {

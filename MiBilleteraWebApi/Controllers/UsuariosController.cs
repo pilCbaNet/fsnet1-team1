@@ -1,6 +1,8 @@
-﻿using MiBilleteraWebApi.Models;
+﻿using Entidades;
+//using MiBilleteraWebApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Negocio;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -23,15 +25,12 @@ namespace MiBilleteraWebApi.Controllers
 
         // GET api/<UsuariosController>/5
         [HttpGet("{id}")]
-        public Usuario GetById(int id)
+        public Usuario? GetById(int id)
         {
             using (var db = new MiBilleteraContext())
             {
 
-                var cuentaCliente = db.Usuarios.Include(i => i.Cuenta).
-                FirstOrDefault(c => c.IdUsuario == id);
-                //var cuentaCliente = db.Usuarios.FirstOrDefault(c => c.IdUsuario == id);
-                return cuentaCliente;
+                return new UsuarioBC().ObtenerUsuario(db, id);
             }
         }
 

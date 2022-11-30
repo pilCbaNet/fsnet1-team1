@@ -869,6 +869,32 @@
             "rid": "win"
           }
         }
+      },
+      "Entidades/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore.SqlServer": "6.0.11"
+        },
+        "compile": {
+          "bin/placeholder/Entidades.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Entidades.dll": {}
+        }
+      },
+      "Negocio/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Entidades": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Negocio.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Negocio.dll": {}
+        }
       }
     }
   },
@@ -2215,12 +2241,24 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "Entidades/1.0.0": {
+      "type": "project",
+      "path": "../Entidades/Entidades.csproj",
+      "msbuildProject": "../Entidades/Entidades.csproj"
+    },
+    "Negocio/1.0.0": {
+      "type": "project",
+      "path": "../Negocio/Negocio.csproj",
+      "msbuildProject": "../Negocio/Negocio.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "Entidades >= 1.0.0",
       "Microsoft.EntityFrameworkCore.SqlServer >= 6.0.11",
       "Microsoft.EntityFrameworkCore.Tools >= 6.0.11",
+      "Negocio >= 1.0.0",
       "Swashbuckle.AspNetCore >= 6.2.3"
     ]
   },
@@ -2231,11 +2269,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\LANSYS\\source\\repos\\MiBilleteraWebApi\\MiBilleteraWebApi.csproj",
+      "projectUniqueName": "C:\\Users\\LANSYS\\Desktop\\Pil Ejercicios\\Ej Angular\\GrupoA\\fsnet1-team1\\MiBilleteraWebApi\\MiBilleteraWebApi.csproj",
       "projectName": "MiBilleteraWebApi",
-      "projectPath": "C:\\Users\\LANSYS\\source\\repos\\MiBilleteraWebApi\\MiBilleteraWebApi.csproj",
+      "projectPath": "C:\\Users\\LANSYS\\Desktop\\Pil Ejercicios\\Ej Angular\\GrupoA\\fsnet1-team1\\MiBilleteraWebApi\\MiBilleteraWebApi.csproj",
       "packagesPath": "C:\\Users\\LANSYS\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\LANSYS\\source\\repos\\MiBilleteraWebApi\\obj\\",
+      "outputPath": "C:\\Users\\LANSYS\\Desktop\\Pil Ejercicios\\Ej Angular\\GrupoA\\fsnet1-team1\\MiBilleteraWebApi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -2256,7 +2294,14 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\LANSYS\\Desktop\\Pil Ejercicios\\Ej Angular\\GrupoA\\fsnet1-team1\\Entidades\\Entidades.csproj": {
+              "projectPath": "C:\\Users\\LANSYS\\Desktop\\Pil Ejercicios\\Ej Angular\\GrupoA\\fsnet1-team1\\Entidades\\Entidades.csproj"
+            },
+            "C:\\Users\\LANSYS\\Desktop\\Pil Ejercicios\\Ej Angular\\GrupoA\\fsnet1-team1\\Negocio\\Negocio.csproj": {
+              "projectPath": "C:\\Users\\LANSYS\\Desktop\\Pil Ejercicios\\Ej Angular\\GrupoA\\fsnet1-team1\\Negocio\\Negocio.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

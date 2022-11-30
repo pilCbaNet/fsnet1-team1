@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "WCJbsRS8zQlVV75053EMs4IGjrCFrYPFhG4DrJtXP5o3uoOqpkB8cHNy9B2YSGK0M0qYdzVYXrG0vXDuDXad1A==",
+  "dgSpecHash": "eBD25V+NJwctxJKb/8YrEIPIMt60X78OBVgo5FOzWis01GllYF82RsRfBdTJdi+cMoqlBDppXOy7H4RS5jSQAw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\LANSYS\\source\\repos\\MiBilleteraWebApi\\MiBilleteraWebApi.csproj",
+  "projectFilePath": "C:\\Users\\LANSYS\\Desktop\\Pil Ejercicios\\Ej Angular\\GrupoA\\fsnet1-team1\\MiBilleteraWebApi\\MiBilleteraWebApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\LANSYS\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\LANSYS\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
