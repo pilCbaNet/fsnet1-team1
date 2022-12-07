@@ -3,6 +3,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Negocio;
 
 namespace MiBilleteraWebApi.Controllers
 {
@@ -19,25 +20,21 @@ namespace MiBilleteraWebApi.Controllers
             }
         }
         [HttpGet("{id}")]
-        public Transaccion GetById(int id)
+        public List<Transaccion> GetById(int id)
         {
             using (var db = new MiBilleteraContext())
             {
-
-                //var cuentaCliente = db.Cuentas.Include(i => i.IdUsuario).
-                //FirstOrDefault(c => c.IdCuenta == id);
-                var transaccionCliente = db.Transacciones.FirstOrDefault(t => t.IdTransacciones == id);
-                return transaccionCliente;
+                var depositosCuenta = new TransaccionBC().ObtenerDepositosByCuenta(db, id);
+                return depositosCuenta;
             }
         }
 
         [HttpPost]
-        public void Post([FromBodyAttribute] Cuenta tTransaccion)
+        public void Post([FromBodyAttribute] Transaccion oTransaccion)
         {
             using (var db = new MiBilleteraContext())
             {
-                db.Cuentas.Add(tTransaccion);
-                db.SaveChanges();
+                new TransaccionBC().CargarTransaccion(db, oTransaccion);
             }
         }
     }

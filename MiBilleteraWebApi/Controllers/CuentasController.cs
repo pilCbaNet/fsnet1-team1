@@ -2,6 +2,7 @@
 //using MiBilleteraWebApi.Models; 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.EntityFrameworkCore;
 using Negocio;
 using System.Data;
@@ -22,16 +23,38 @@ namespace MiBilleteraWebApi.Controllers
                 return db.Cuentas.ToList();
             }
         }
-        [HttpGet("{id}")]
+
+        [HttpGet("{id:int}")]
         public Cuenta? GetById(int id)
         {
             using (var db = new MiBilleteraContext())
             {
 
-                var cuentaCliente = new CuentaBC().ObtenerCuenta(db, id);
-                //var cuentaCliente = db.Cuentas.FirstOrDefault(c => c.IdCuenta == id);
-                    return cuentaCliente;
+                var depositos = new CuentaBC().ObtenerCuenta(db, id);
+                return depositos;
+            }
+        }
+
+        [HttpGet("{id:int}/Depositos")]
+        public Cuenta? GetByIdDepositos(int id)
+        {
+            using (var db = new MiBilleteraContext())
+            {
+
+                var depositos = new CuentaBC().ObtenerDepositosCuenta(db, id);
+                return depositos;
              }
+        }
+        [HttpGet("{id:int}/transferencias")]
+        //[Route("{transferencias}")]
+        public Cuenta? GetByIdTransferencias(int id)
+        {
+            using (var db = new MiBilleteraContext())
+            {
+
+                var depositos = new CuentaBC().ObtenerTransferenciasCuenta(db, id);
+                return depositos;
+            }
         }
 
         [HttpPost]
@@ -39,9 +62,9 @@ namespace MiBilleteraWebApi.Controllers
         {
             using (var db = new MiBilleteraContext())
             {
-                db.Cuentas.Add(eCuenta);
-                db.SaveChanges();
+                new CuentaBC().CrearCuenta(db, eCuenta);
             }
+            
         }
 
         [HttpPut]

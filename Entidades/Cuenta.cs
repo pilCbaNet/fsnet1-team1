@@ -19,7 +19,7 @@ namespace Entidades
         public int IdUsuario { get; set; }
 
         public virtual Usuario? IdUsuarioNavigation { get; set; }
-        //public virtual ICollection<Transaccion> TransaccioneIdCuentaDestinoNavigations { get; set; }
+        public virtual ICollection<Transaccion> TransaccioneIdCuentaDestinoNavigations { get; set; }
         public virtual ICollection<Transaccion> TransaccioneIdCuentaOrigenNavigations { get; set; }
     }
 }

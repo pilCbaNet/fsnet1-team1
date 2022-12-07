@@ -16,5 +16,26 @@ namespace Negocio
                 FirstOrDefault(c => c.IdCuenta == id);
             return cuentaCliente;
         }
+
+        public Cuenta ObtenerDepositosCuenta(MiBilleteraContext db, int id)
+        {
+            
+            var depositosCliente = db.Cuentas.Include(t => t.TransaccioneIdCuentaDestinoNavigations).FirstOrDefault(c => c.IdCuenta == id);
+            return depositosCliente;
+        }
+       
+        public Cuenta ObtenerTransferenciasCuenta(MiBilleteraContext db, int id)
+        {
+            
+            var depositosCliente = db.Cuentas.Include(t => t.TransaccioneIdCuentaOrigenNavigations).FirstOrDefault(c => c.IdCuenta == id);
+            return depositosCliente;
+        }
+
+        public void CrearCuenta(MiBilleteraContext db, Cuenta eCuenta)
+        {
+                db.Cuentas.Add(eCuenta);
+                db.SaveChanges();
+            
+        }
     }
 }

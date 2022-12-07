@@ -3,6 +3,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Negocio;
+using System.Security.Cryptography;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -31,6 +32,16 @@ namespace MiBilleteraWebApi.Controllers
             {
 
                 return new UsuarioBC().ObtenerUsuario(db, id);
+            }
+        }
+
+        [HttpGet("{us}/{pass}")]
+        public Usuario? GetByLogin(string us, string pass)
+        {
+            using (var db = new MiBilleteraContext())
+            {
+                
+                return new UsuarioBC().LoginUsuario(db, us, pass);
             }
         }
 

@@ -55,10 +55,10 @@ namespace Entidades
 
                 entity.Property(e => e.Fecha).HasColumnType("datetime");
 
-                entity.HasOne(d => d.IdCuentaDestinoNavigation);
-                    //.WithMany(p => p.TransaccioneIdCuentaDestinoNavigations)
-                    //.HasForeignKey(d => d.IdCuentaDestino)
-                    //.HasConstraintName("FK_Transacciones_Cuentas1");
+                entity.HasOne(d => d.IdCuentaDestinoNavigation)
+                    .WithMany(p => p.TransaccioneIdCuentaDestinoNavigations)
+                    .HasForeignKey(d => d.IdCuentaDestino)
+                    .HasConstraintName("FK_Transacciones_Cuentas1");
 
                 entity.HasOne(d => d.IdCuentaOrigenNavigation)
                     .WithMany(p => p.TransaccioneIdCuentaOrigenNavigations)
