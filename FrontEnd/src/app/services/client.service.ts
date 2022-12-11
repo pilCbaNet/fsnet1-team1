@@ -18,9 +18,9 @@ export class ClientService {
   }
 
   addBalance(clientId: number, balance: number) {
-    return this.http.post<Client>(`${this.baseURL}/addbalance`, {
-      clientId,
-      balance,
+    return this.http.put<Client>(`${this.baseURL}/addbalance`, {
+      id:clientId,
+      monto:balance,
     });
   }
 }

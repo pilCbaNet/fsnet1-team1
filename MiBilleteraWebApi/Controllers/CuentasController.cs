@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Negocio;
 using System.Data;
 using System.Linq;
+using System.Text.Json.Nodes;
 
 namespace MiBilleteraWebApi.Controllers
 {
@@ -65,6 +66,19 @@ namespace MiBilleteraWebApi.Controllers
                 new CuentaBC().CrearCuenta(db, eCuenta);
             }
             
+        }
+
+        [HttpPut("addbalance")]
+        public Cuenta? PutDepositar(JsonObject deposito)
+        {
+            Cuenta? cuentaVieja;
+            using (var db = new MiBilleteraContext())
+            {
+                cuentaVieja = db.Cuentas.FirstOrDefault(a => a.IdCuenta == int.Parse(deposito["id"].ToString()));
+                cuentaVieja.Saldo = cuentaVieja.Saldo + decimal.Parse(deposito["monto"].ToString());
+                db.SaveChanges();
+            }
+            return cuentaVieja;
         }
 
         [HttpPut]

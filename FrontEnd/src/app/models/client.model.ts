@@ -12,7 +12,7 @@ import { Transaction } from './transaction.model';
 // }
 
 export interface Client {
-  id?: number;
+  idCuenta?: number;
   cbu: string;
   saldo: number;
   fechaAlta: any;

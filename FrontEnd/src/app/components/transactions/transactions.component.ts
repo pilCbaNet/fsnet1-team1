@@ -30,7 +30,7 @@ export class TransactionsComponent implements OnInit {
   ) {}
 
   addAmount(amount: number) {
-    this.clientService.addBalance(this.client!.id!, amount).subscribe((c) => {
+    this.clientService.addBalance(this.client!.idCuenta!, amount).subscribe((c) => {
       this.client!.saldo = c.saldo;
     });
   }
