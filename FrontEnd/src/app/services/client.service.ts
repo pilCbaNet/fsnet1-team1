@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 export class ClientService {
   baseURL: string;
   constructor(private http: HttpClient) {
-    this.baseURL = `${environment.baseURL}/client`;
+    this.baseURL = `${environment.baseURL}/api/Cuentas`;
   }
 
   findClientById(id: number): Observable<Client> {

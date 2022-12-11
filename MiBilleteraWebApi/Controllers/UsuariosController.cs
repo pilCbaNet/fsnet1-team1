@@ -56,7 +56,7 @@ namespace MiBilleteraWebApi.Controllers
                 var loginResponse = new JsonObject
                 {
                     ["token"] = new DateTime(2019, 8, 1),
-                    ["clientId"] = 25,
+                    ["clientId"] = user.Cuenta.FirstOrDefault().IdCuenta,
                     ["userId"] = user.IdUsuario,
                     ["name"] = user.Nombre + ", " + user.Apellido ,
                     ["username"] = user.Usuario1,

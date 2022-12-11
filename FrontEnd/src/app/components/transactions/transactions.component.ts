@@ -13,7 +13,14 @@ import { EventTypes } from 'src/app/models/event-types';
   styleUrls: ['./transactions.component.css'],
 })
 export class TransactionsComponent implements OnInit {
-  client: Client = { balance: 0, deposits: [], transfers: [], name: '' };
+  client: Client = {
+    cbu: '',
+    saldo: 0,
+    fechaAlta: undefined,
+    fechaBaja: undefined,
+    transfers: [],
+    deposits: []
+  };
 
   constructor(
     private clientService: ClientService,
@@ -24,14 +31,14 @@ export class TransactionsComponent implements OnInit {
 
   addAmount(amount: number) {
     this.clientService.addBalance(this.client!.id!, amount).subscribe((c) => {
-      this.client!.balance = c.balance;
+      this.client!.saldo = c.saldo;
     });
   }
 
   transfer(transferDto: TransferDto) {
     this.transferService.postTransfer(transferDto).subscribe({
       next: (t) => {
-        this.client.balance -= t.amount;
+        this.client.saldo -= t.amount;
         this.client.transfers.unshift(t)
 
         this.toastService.showToast(':D', `La transferencia fue exitosa`, EventTypes.Success);
