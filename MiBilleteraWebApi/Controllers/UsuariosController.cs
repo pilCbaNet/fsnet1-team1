@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Negocio;
 using System.Security.Cryptography;
+using System.Text.Json;
+using System.Text.Json.Nodes;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -42,6 +44,25 @@ namespace MiBilleteraWebApi.Controllers
             {
                 
                 return new UsuarioBC().LoginUsuario(db, us, pass);
+            }
+        }
+
+        [HttpPost("login")]
+        public JsonObject PostByLogin([FromBody] Login login)
+        {
+            using (var db = new MiBilleteraContext())
+            {
+                Usuario user = new UsuarioBC().LoginUsuario(db, login.Username, login.Password);
+                var loginResponse = new JsonObject
+                {
+                    ["token"] = new DateTime(2019, 8, 1),
+                    ["clientId"] = 25,
+                    ["userId"] = user.IdUsuario,
+                    ["name"] = user.Nombre + ", " + user.Apellido ,
+                    ["username"] = user.Usuario1,
+                };
+
+                return loginResponse;
             }
         }
 
