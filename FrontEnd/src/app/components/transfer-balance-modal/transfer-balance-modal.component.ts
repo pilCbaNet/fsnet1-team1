@@ -30,8 +30,8 @@ export class TransferBalanceModalComponent implements OnInit {
   constructor(private fb: FormBuilder, private tokenService: TokenService) {
     this.transferForm = this.fb.group({
       amount: ['', [Validators.required, this.amountValidator()]],
-      giverName: [],
-      receiverName: ['', [Validators.required, Validators.minLength(3)]],
+      giverUsername: [],
+      receiverUsername: ['', [Validators.required, Validators.minLength(3)]],
     });
   }
 
@@ -42,7 +42,9 @@ export class TransferBalanceModalComponent implements OnInit {
   }
 
   send() {
-    this.transferForm.patchValue({ giverName: this.tokenService.getName() });
+    this.transferForm.patchValue({
+      giverUsername: this.tokenService.getUsername(),
+    });
     this.transferSend.emit(this.transferForm.value);
   }
 

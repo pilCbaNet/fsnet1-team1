@@ -28,6 +28,10 @@ export class TokenService {
     return localStorage.getItem(NAME) || '';
   }
 
+  getUsername(): string {
+    return localStorage.getItem(USERNAME) || '';
+  }
+
   isAuthenticated(): boolean {
     return this.getToken() !== null;
   }

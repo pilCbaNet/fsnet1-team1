@@ -19,7 +19,7 @@ export class TransactionsComponent implements OnInit {
     fechaAlta: undefined,
     fechaBaja: undefined,
     transfers: [],
-    deposits: []
+    deposits: [],
   };
 
   constructor(
@@ -30,18 +30,24 @@ export class TransactionsComponent implements OnInit {
   ) {}
 
   addAmount(amount: number) {
-    this.clientService.addBalance(this.client!.idCuenta!, amount).subscribe((c) => {
-      this.client!.saldo = c.saldo;
-    });
+    this.clientService
+      .addBalance(this.client!.idCuenta!, amount)
+      .subscribe((c) => {
+        this.client!.saldo = c.saldo;
+      });
   }
 
   transfer(transferDto: TransferDto) {
     this.transferService.postTransfer(transferDto).subscribe({
       next: (t) => {
         this.client.saldo -= t.amount;
-        this.client.transfers.unshift(t)
+        this.client.transfers.unshift(t);
 
-        this.toastService.showToast(':D', `La transferencia fue exitosa`, EventTypes.Success);
+        this.toastService.showToast(
+          ':D',
+          `Transacción realizada con éxito`,
+          EventTypes.Success
+        );
       },
       error: (e) => {
         this.toastService.showToast(':(', e.error.message, EventTypes.Error);

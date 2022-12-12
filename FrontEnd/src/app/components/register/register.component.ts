@@ -59,7 +59,7 @@ export class RegisterComponent {
         error: (err) => {
           this.toastService.showToast(
             ':(',
-            err.error.message,
+            `${err.error.message}`,
             EventTypes.Error
           );
           this.registerForm.reset();

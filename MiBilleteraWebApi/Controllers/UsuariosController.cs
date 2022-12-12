@@ -68,7 +68,7 @@ namespace MiBilleteraWebApi.Controllers
 
         // POST api/Usuarios/register
         [HttpPost("register")]
-        public JsonObject Post([FromBody] Usuario U)
+        public IActionResult Post([FromBody] Usuario U)
         {
             var currentDate = DateTime.Now;
             Cuenta cuenta = new Cuenta();
@@ -81,20 +81,23 @@ namespace MiBilleteraWebApi.Controllers
             U.Cuenta.Add(cuenta);
             using (var db = new MiBilleteraContext())
             {
+                if (db.Usuarios.Any(x => x.Usuario1 == U.Usuario1))
+                {
+                    var message = new JsonObject
+                    {
+                        ["message"] = "Username already exists"
+                    };
+                    return BadRequest(message);
+                }
                 db.Usuarios.Add(U);
-                // db.Cuentas.Add(cuenta);
                 db.SaveChanges();
             }
             var registerResponse = new JsonObject
             {
-                ["token"] = new DateTime(2019, 8, 1),
-                ["clientId"] = U.Cuenta.FirstOrDefault().IdCuenta,
-                ["userId"] = U.IdUsuario,
-                ["name"] = U.Nombre + ", " + U.Apellido,
                 ["username"] = U.Usuario1
             };
 
-            return registerResponse;
+            return Ok(registerResponse);
         }
 
         // PUT api/Usuarios/5
