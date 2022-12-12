@@ -15,7 +15,7 @@ namespace MiBilleteraWebApi.Controllers
     [ApiController]
     public class UsuariosController : ControllerBase
     {
-        // GET: api/<UsuariosController>
+        // GET: api/Usuarios
         [HttpGet]
         public List<Usuario> Get()
         {
@@ -42,7 +42,7 @@ namespace MiBilleteraWebApi.Controllers
         {
             using (var db = new MiBilleteraContext())
             {
-                
+
                 return new UsuarioBC().LoginUsuario(db, us, pass);
             }
         }
@@ -58,7 +58,7 @@ namespace MiBilleteraWebApi.Controllers
                     ["token"] = new DateTime(2019, 8, 1),
                     ["clientId"] = user.Cuenta.FirstOrDefault().IdCuenta,
                     ["userId"] = user.IdUsuario,
-                    ["name"] = user.Nombre + ", " + user.Apellido ,
+                    ["name"] = user.Nombre + ", " + user.Apellido,
                     ["username"] = user.Usuario1,
                 };
 
@@ -66,8 +66,8 @@ namespace MiBilleteraWebApi.Controllers
             }
         }
 
-        // POST api/<UsuariosController>
-        [HttpPost]
+        // POST api/Usuarios/register
+        [HttpPost("register")]
         public void Post([FromBody] Usuario U)
         {
             using (var db = new MiBilleteraContext())
@@ -77,7 +77,7 @@ namespace MiBilleteraWebApi.Controllers
             }
         }
 
-        // PUT api/<UsuariosController>/5
+        // PUT api/Usuarios/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] Usuario U)
         {
@@ -98,14 +98,14 @@ namespace MiBilleteraWebApi.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            using (var db= new MiBilleteraContext())
+            using (var db = new MiBilleteraContext())
             {
-                var regCuentas= db.Cuentas.FirstOrDefault(c => c.IdUsuario == id);
+                var regCuentas = db.Cuentas.FirstOrDefault(c => c.IdUsuario == id);
                 if (regCuentas == null)
                 {
-                    var regUsuario = db.Usuarios.FirstOrDefault(u=> u.IdUsuario==id);
+                    var regUsuario = db.Usuarios.FirstOrDefault(u => u.IdUsuario == id);
                     db.Remove(regUsuario);
-                    db.SaveChanges(); 
+                    db.SaveChanges();
                 }
                 else
                 {
@@ -114,6 +114,6 @@ namespace MiBilleteraWebApi.Controllers
             }
 
         }
-        
-    } 
+
+    }
 }
