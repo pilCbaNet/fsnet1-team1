@@ -1,6 +1,6 @@
 <div class="list">
-  <p *ngFor="let t of transactions">
-    <span class="fw-semibold">{{ t.giver ? t.giver.cbu : name }}</span> pago {{ t.amount | currency }} a
-    <span class="fw-semibold">{{ t.receiver ? t.receiver.cbu : name }}</span> el dia {{t.createdOn | date : "short" }}
+  <p *ngFor="let t of list">
+    <span class="fw-semibold">{{ name }}</span> pago $ {{ t[0] }} a {{ t[1] }},
+    {{ t[2] }} en la fecha {{ t[3] }}
   </p>
 </div>

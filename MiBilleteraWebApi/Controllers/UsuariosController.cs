@@ -32,8 +32,16 @@ namespace MiBilleteraWebApi.Controllers
         {
             using (var db = new MiBilleteraContext())
             {
-
                 return new UsuarioBC().ObtenerUsuario(db, id);
+            }
+        }
+
+        [HttpGet("username/{username}")]
+        public Usuario? GetByUsername(string username)
+        {
+            using (var db = new MiBilleteraContext())
+            {
+                return new UsuarioBC().GetUserByUsername(db, username);
             }
         }
 
@@ -78,7 +86,6 @@ namespace MiBilleteraWebApi.Controllers
             cuenta.Saldo = 0;
             cuenta.FechaAlta = DateTime.Now;
             U.FechaAlta = DateTime.Now;
-            U.Cuenta.Add(cuenta);
             using (var db = new MiBilleteraContext())
             {
                 if (db.Usuarios.Any(x => x.Usuario1 == U.Usuario1))
@@ -89,6 +96,12 @@ namespace MiBilleteraWebApi.Controllers
                     };
                     return BadRequest(message);
                 }
+                do
+                {
+                    cuenta.Cbu = rngGen.RandomString(12);
+                }
+                while (db.Cuentas.Any(x => x.Cbu == cuenta.Cbu));
+                U.Cuenta.Add(cuenta);
                 db.Usuarios.Add(U);
                 db.SaveChanges();
             }

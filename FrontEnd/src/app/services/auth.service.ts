@@ -5,6 +5,7 @@ import { environment } from './../../environments/environment';
 import { Observable, tap } from 'rxjs';
 import { TokenService } from './token.service';
 import { LoginResponse } from '../models/login-response.model';
+import { Transaction } from '../models/transaction.model';
 
 @Injectable({
   providedIn: 'root',
@@ -26,5 +27,9 @@ export class AuthService {
   //registra un usuario
   register(user: User): Observable<User> {
     return this.http.post<User>(`${this.baseURL}/register`, user);
+  }
+
+  GetDepositsByUsername(username: string): Observable<Transaction[]> {
+    return this.http.get<Transaction[]>(`${this.baseURL}/username/${username}`);
   }
 }

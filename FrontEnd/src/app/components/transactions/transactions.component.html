@@ -38,9 +38,7 @@
     </div>
     <div class="col-lg col-md-6">
       <p class="fw-bold text-decoration-underline">Transferencias</p>
-      <app-transaction-list
-        [transactions]="client!.transfers"
-      ></app-transaction-list>
+      <app-transaction-list [list]="lista"></app-transaction-list>
     </div>
   </div>
 </div>

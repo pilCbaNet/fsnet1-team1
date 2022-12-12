@@ -6,6 +6,8 @@ import { TransferDto } from './../../models/transfer-dto.model';
 import { TransfersService } from './../../services/transfers.service';
 import { ToastService } from './../../services/toast.service';
 import { EventTypes } from 'src/app/models/event-types';
+import { User } from 'src/app/models/user.model';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-transactions',
@@ -22,11 +24,19 @@ export class TransactionsComponent implements OnInit {
     deposits: [],
   };
 
+  user: User = {
+    username: '',
+    password: '',
+  };
+
+  idCuenta: number = 0;
+  lista: Array<Array<String>> = [];
   constructor(
     private clientService: ClientService,
     private ts: TokenService,
     private transferService: TransfersService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private authservice: AuthService
   ) {}
 
   addAmount(amount: number) {
@@ -55,13 +65,30 @@ export class TransactionsComponent implements OnInit {
     });
   }
 
+  getByUsername(username: string) {
+    this.transferService.getTransfersByUsername(username).subscribe({
+      next: (res) => {
+        res.forEach((e) => {
+          var number: number = +e[0];
+          this.lista.push([e[0], e[1], e[2], e[3]]);
+        });
+      },
+      error: (e) => {},
+    });
+  }
+
   ngOnInit(): void {
     if (this.ts.isAuthenticated()) {
+      this.user.username = this.ts.getUsername();
       this.clientService
         .findClientById(this.ts.getClientId())
         .subscribe((c) => {
           this.client = c;
         });
+      this.getByUsername(this.user.username);
+      console.log(this.user.username);
+      console.log(this.user.password);
+      console.log(this.lista);
     }
   }
 }

@@ -20,13 +20,52 @@ namespace MiBilleteraWebApi.Controllers
                 return db.Transacciones.ToList();
             }
         }
-        [HttpGet("{id}")]
-        public List<Transaccion> GetById(int id)
+        // [HttpGet("{id}")]
+        // public List<Transaccion> GetById(int id)
+        // {
+        //     using (var db = new MiBilleteraContext())
+        //     {
+        //         var depositosCuenta = new TransaccionBC().ObtenerDepositosByCuenta(db, id);
+        //         return depositosCuenta;
+        //     }
+        // }
+
+        // [HttpGet("{username}")]
+        // public List<Transaccion> GetByUsername(string username)
+        // {
+        //     using (var db = new MiBilleteraContext())
+        //     {
+        //         var transacciones = new TransaccionBC().ObtenerDepositosByUsername(db, username);
+        //         return transacciones;
+        //     }
+        // }
+
+        [HttpGet("{username}")]
+        public List<List<String>> GetByUsername(string username)
         {
             using (var db = new MiBilleteraContext())
             {
-                var depositosCuenta = new TransaccionBC().ObtenerDepositosByCuenta(db, id);
-                return depositosCuenta;
+                var transactionList = new List<List<String>>();
+                var transacciones = new TransaccionBC().ObtenerDepositosByUsername(db, username);
+                foreach (Transaccion transaccion in transacciones)
+                {
+                    var amount = transaccion.Monto;
+                    string amountStr = amount.ToString("0.00");
+                    var receiver = transaccion.IdCuentaDestino;
+                    var receiver2 = db.Cuentas.FirstOrDefault(x => x.IdCuenta == receiver);
+                    var receiver3 = receiver2.IdUsuario;
+                    var receiverUser = db.Usuarios.FirstOrDefault(x => x.IdUsuario == receiver3);
+                    var receiverName = receiverUser.Nombre;
+                    var receiverLastName = receiverUser.Apellido;
+                    string date = transaccion.Fecha.ToString();
+                    List<String> temp = new List<String>();
+                    temp.Add(amountStr);
+                    temp.Add(receiverName);
+                    temp.Add(receiverLastName);
+                    temp.Add(date);
+                    transactionList.Add(temp);
+                }
+                return transactionList;
             }
         }
 
@@ -48,7 +87,6 @@ namespace MiBilleteraWebApi.Controllers
             Usuario? usuarioOrigen;
             Usuario? usuarioDestino;
             Transaccion? transaccionNueva = new Transaccion();
-            decimal monto = decimal.Parse(transaccion["amount"].ToString());
             transaccionNueva.Monto = decimal.Parse(transaccion["amount"].ToString());
             transaccionNueva.giverName = transaccion["giverUsername"].ToString();
             transaccionNueva.receiverName = transaccion["receiverUsername"].ToString();
@@ -80,7 +118,6 @@ namespace MiBilleteraWebApi.Controllers
                 cuentaDestino.Saldo += transaccionNueva.Monto;
                 transaccionNueva.TipoTransaccion = 1;
                 transaccionNueva.Fecha = DateTime.Now;
-                transaccionNueva.Monto = monto;
                 new TransaccionBC().CargarTransaccion(db, transaccionNueva);
             }
             var responseOkMessage = new JsonObject
