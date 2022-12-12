@@ -21,6 +21,7 @@ export class TransactionListComponent implements OnInit {
 
   name: string = '';
   username: string = '';
+  i: number = 0;
 
   
 

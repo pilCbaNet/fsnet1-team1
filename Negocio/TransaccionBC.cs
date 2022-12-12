@@ -23,12 +23,21 @@ namespace Negocio
             return depositosCliente;
         }
 
-        public List<Transaccion> ObtenerDepositosByUsername(MiBilleteraContext db, string username)
+        public List<Transaccion> ObtenerPagosByUsername(MiBilleteraContext db, string username)
         {
             Usuario? cliente;
             cliente = db.Usuarios.FirstOrDefault(x => x.Usuario1 == username);
             Cuenta cuenta = db.Cuentas.FirstOrDefault(x => x.IdUsuario == cliente.IdUsuario);
             var transacciones = db.Transacciones.Where(x => x.IdCuentaOrigen == cuenta.IdCuenta).ToList();
+            return transacciones;
+        }
+
+        public List<Transaccion> ObtenerCobrosByUsername(MiBilleteraContext db, string username)
+        {
+            Usuario? cliente;
+            cliente = db.Usuarios.FirstOrDefault(x => x.Usuario1 == username);
+            Cuenta cuenta = db.Cuentas.FirstOrDefault(x => x.IdUsuario == cliente.IdUsuario);
+            var transacciones = db.Transacciones.Where(x => x.IdCuentaDestino == cuenta.IdCuenta).ToList();
             return transacciones;
         }
 

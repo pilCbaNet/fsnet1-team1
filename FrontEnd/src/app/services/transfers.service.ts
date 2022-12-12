@@ -20,8 +20,16 @@ export class TransfersService {
     return this.http.post<Transaction>(this.baseURL, transferDto);
   }
 
-  getTransfersByUsername(username: string): Observable<Array<Array<String>>> {
-    return this.http.get<Array<Array<String>>>(`${this.baseURL}/${username}`);
+  getPagosByUsername(username: string): Observable<Array<Array<String>>> {
+    return this.http.get<Array<Array<String>>>(
+      `${this.baseURL}/pagos/${username}`
+    );
+  }
+
+  getCobrosByUsername(username: string): Observable<Array<Array<String>>> {
+    return this.http.get<Array<Array<String>>>(
+      `${this.baseURL}/cobros/${username}`
+    );
   }
 
   getDepositosByUsername(id: string) {

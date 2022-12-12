@@ -33,7 +33,10 @@ export class TransactionsComponent implements OnInit {
   };
 
   idCuenta: number = 0;
-  lista: Array<Array<String>> = [];
+  listaCobros: Array<Array<String>> = [];
+  listaPagos: Array<Array<String>> = [];
+  pagosShow: boolean = true;
+  cobrosShow: boolean = false;
   constructor(
     private clientService: ClientService,
     private ts: TokenService,
@@ -50,6 +53,15 @@ export class TransactionsComponent implements OnInit {
       });
   }
 
+  pagosFunction() {
+    this.pagosShow = true;
+    this.cobrosShow = false;
+  }
+
+  cobrosFunction() {
+    this.cobrosShow = true;
+    this.pagosShow = false;
+  }
   transfer(transferDto: TransferDto) {
     this.transferService.postTransfer(transferDto).subscribe({
       next: (t) => {
@@ -68,12 +80,22 @@ export class TransactionsComponent implements OnInit {
     });
   }
 
-  getByUsername(username: string) {
-    this.transferService.getTransfersByUsername(username).subscribe({
+  getPagosByUsername(username: string) {
+    this.transferService.getPagosByUsername(username).subscribe({
       next: (res) => {
         res.forEach((e) => {
-          var number: number = +e[0];
-          this.lista.push([e[0], e[1], e[2], e[3]]);
+          this.listaPagos.unshift([e[0], e[1], e[2], e[3]]);
+        });
+      },
+      error: (e) => {},
+    });
+  }
+
+  getCobrosByUsername(username: string) {
+    this.transferService.getCobrosByUsername(username).subscribe({
+      next: (res) => {
+        res.forEach((e) => {
+          this.listaCobros.unshift([e[0], e[1], e[2], e[3]]);
         });
       },
       error: (e) => {},
@@ -88,10 +110,11 @@ export class TransactionsComponent implements OnInit {
         .subscribe((c) => {
           this.client = c;
         });
-      this.getByUsername(this.user.username);
+      this.getPagosByUsername(this.user.username);
+      this.getCobrosByUsername(this.user.username);
       console.log(this.user.username);
       console.log(this.user.password);
-      console.log(this.lista);
+      console.log(this.listaPagos);
     }
 
     this.transferService.getDepositosByUsername(this.ts.getClientId().toString()).subscribe((res:any)=>{
