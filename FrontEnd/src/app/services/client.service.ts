@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 export class ClientService {
   baseURL: string;
   constructor(private http: HttpClient) {
-    this.baseURL = `${environment.baseURL}/client`;
+    this.baseURL = `${environment.baseURL}/api/Cuentas`;
   }
 
   findClientById(id: number): Observable<Client> {
@@ -18,9 +18,9 @@ export class ClientService {
   }
 
   addBalance(clientId: number, balance: number) {
-    return this.http.post<Client>(`${this.baseURL}/addbalance`, {
-      clientId,
-      balance,
+    return this.http.put<Client>(`${this.baseURL}/addbalance`, {
+      id:clientId,
+      monto:balance,
     });
   }
 }

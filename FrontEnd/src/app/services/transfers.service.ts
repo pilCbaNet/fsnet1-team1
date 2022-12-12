@@ -12,7 +12,7 @@ export class TransfersService {
   baseURL: string;
 
   constructor(private http: HttpClient) {
-    this.baseURL = `${environment.baseURL}/transaction`;
+    this.baseURL = `${environment.baseURL}api/Transacciones`;
   }
 
   postTransfer(transferDto: TransferDto): Observable<Transaction> {

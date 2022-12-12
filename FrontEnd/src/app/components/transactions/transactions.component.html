@@ -14,7 +14,7 @@
       <div class="amount-box text-center">
         <img src="../../../assets/wallet.png" alt="wallet" />
         <p>Balance</p>
-        <p class="amount">{{ client.balance | currency }}</p>
+        <p class="amount">{{ client.saldo | currency }}</p>
       </div>
 
       <div class="btn-group text-center">
@@ -49,7 +49,7 @@
   (amountSend)="addAmount($event)"
 ></app-add-balance-modal>
 <app-transfer-balance-modal
-  [balance]="client.balance"
+  [balance]="client.saldo"
   [modalId]="'transferBalanceModal'"
   (transferSend)="transfer($event)"
 ></app-transfer-balance-modal>
