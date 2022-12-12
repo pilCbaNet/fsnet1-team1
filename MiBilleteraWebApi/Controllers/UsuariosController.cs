@@ -6,7 +6,7 @@ using Negocio;
 using System.Security.Cryptography;
 using System.Text.Json;
 using System.Text.Json.Nodes;
-
+using rngGenClass;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace MiBilleteraWebApi.Controllers
@@ -68,13 +68,33 @@ namespace MiBilleteraWebApi.Controllers
 
         // POST api/Usuarios/register
         [HttpPost("register")]
-        public void Post([FromBody] Usuario U)
+        public JsonObject Post([FromBody] Usuario U)
         {
+            var currentDate = DateTime.Now;
+            Cuenta cuenta = new Cuenta();
+            cuenta.IdCuenta = U.IdUsuario;
+            cuenta.IdUsuario = U.IdUsuario;
+            cuenta.Cbu = rngGen.RandomString(12);
+            cuenta.Saldo = 0;
+            cuenta.FechaAlta = DateTime.Now;
+            U.FechaAlta = DateTime.Now;
+            U.Cuenta.Add(cuenta);
             using (var db = new MiBilleteraContext())
             {
                 db.Usuarios.Add(U);
+                // db.Cuentas.Add(cuenta);
                 db.SaveChanges();
             }
+            var registerResponse = new JsonObject
+            {
+                ["token"] = new DateTime(2019, 8, 1),
+                ["clientId"] = U.Cuenta.FirstOrDefault().IdCuenta,
+                ["userId"] = U.IdUsuario,
+                ["name"] = U.Nombre + ", " + U.Apellido,
+                ["username"] = U.Usuario1
+            };
+
+            return registerResponse;
         }
 
         // PUT api/Usuarios/5
