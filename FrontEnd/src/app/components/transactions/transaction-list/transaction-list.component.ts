@@ -4,6 +4,7 @@ import { TokenService } from './../../../services/token.service';
 import { TransfersService } from 'src/app/services/transfers.service';
 import { User } from 'src/app/models/user.model';
 import { ToastService } from 'src/app/services/toast.service';
+import { Client } from 'src/app/models/client.model';
 
 @Component({
   selector: 'app-transaction-list',
@@ -15,9 +16,13 @@ export class TransactionListComponent implements OnInit {
   transactions: Transaction[] = [];
   @Input()
   list: Array<Array<String>> = [];
+  @Input()
+  typeMov:string = "";
 
   name: string = '';
   username: string = '';
+
+  
 
   constructor(
     private ts: TokenService,
@@ -28,5 +33,6 @@ export class TransactionListComponent implements OnInit {
   ngOnInit(): void {
     this.name = this.ts.getName();
     this.username = this.ts.getUsername();
+    
   }
 }

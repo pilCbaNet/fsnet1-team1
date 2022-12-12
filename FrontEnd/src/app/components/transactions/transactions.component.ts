@@ -8,6 +8,7 @@ import { ToastService } from './../../services/toast.service';
 import { EventTypes } from 'src/app/models/event-types';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
+import { Transaction } from 'src/app/models/transaction.model';
 
 @Component({
   selector: 'app-transactions',
@@ -23,6 +24,8 @@ export class TransactionsComponent implements OnInit {
     transfers: [],
     deposits: [],
   };
+
+  depositos:Transaction[] = [];
 
   user: User = {
     username: '',
@@ -90,5 +93,27 @@ export class TransactionsComponent implements OnInit {
       console.log(this.user.password);
       console.log(this.lista);
     }
+
+    this.transferService.getDepositosByUsername(this.ts.getClientId().toString()).subscribe((res:any)=>{
+      this.depositos = [];
+      res.forEach((element:any) => {
+        let dep:Transaction = {
+          id: element.idDepositos,
+          receiver: {
+            cbu: element.idCuentaNavigation.cbu ,
+            saldo: element.idCuentaNavigation.saldo ,
+            fechaAlta: element.idCuentaNavigation.fechaAlta ,
+            fechaBaja: element.idCuentaNavigation.fechaBaja ,
+            transfers: element.idCuentaNavigation.transaccioneIdCuentaOrigenNavigations ,
+            deposits: element.idCuentaNavigation.depositos
+          },
+          amount: element.monto,
+          createdOn: element.fecha
+        }
+        this.depositos.push(dep);
+      });
+      console.log(this.depositos)
+    });
+
   }
 }

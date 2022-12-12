@@ -23,4 +23,11 @@ export class TransfersService {
   getTransfersByUsername(username: string): Observable<Array<Array<String>>> {
     return this.http.get<Array<Array<String>>>(`${this.baseURL}/${username}`);
   }
+
+  getDepositosByUsername(id: string) {
+    return this.http.get(`${environment.baseURL}/api/DepositosControllers/${id}`);
+  }
+
+
+
 }

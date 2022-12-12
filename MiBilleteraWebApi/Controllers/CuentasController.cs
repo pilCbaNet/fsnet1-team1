@@ -76,7 +76,15 @@ namespace MiBilleteraWebApi.Controllers
             {
                 cuentaVieja = db.Cuentas.FirstOrDefault(a => a.IdCuenta == int.Parse(deposito["id"].ToString()));
                 cuentaVieja.Saldo = cuentaVieja.Saldo + decimal.Parse(deposito["monto"].ToString());
+
+                Depositos depositosCliente = new Depositos();
+
+                depositosCliente.Monto = decimal.Parse(deposito["monto"].ToString());
+                depositosCliente.Fecha = DateTime.Now;
+                depositosCliente.IdCuenta= cuentaVieja.IdCuenta;
+
                 db.SaveChanges();
+                new DepositosBC().CrearDeposito(db, depositosCliente);
             }
             return cuentaVieja;
         }
