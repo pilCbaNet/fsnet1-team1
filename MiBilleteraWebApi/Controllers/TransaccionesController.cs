@@ -40,13 +40,13 @@ namespace MiBilleteraWebApi.Controllers
         //     }
         // }
 
-        [HttpGet("{username}")]
-        public List<List<String>> GetByUsername(string username)
+        [HttpGet("pagos/{username}")]
+        public List<List<String>> GetPagosByUsername(string username)
         {
             using (var db = new MiBilleteraContext())
             {
                 var transactionList = new List<List<String>>();
-                var transacciones = new TransaccionBC().ObtenerDepositosByUsername(db, username);
+                var transacciones = new TransaccionBC().ObtenerPagosByUsername(db, username);
                 foreach (Transaccion transaccion in transacciones)
                 {
                     var amount = transaccion.Monto;
@@ -62,6 +62,34 @@ namespace MiBilleteraWebApi.Controllers
                     temp.Add(amountStr);
                     temp.Add(receiverName);
                     temp.Add(receiverLastName);
+                    temp.Add(date);
+                    transactionList.Add(temp);
+                }
+                return transactionList;
+            }
+        }
+        [HttpGet("cobros/{username}")]
+        public List<List<String>> GetCobrosByUsername(string username)
+        {
+            using (var db = new MiBilleteraContext())
+            {
+                var transactionList = new List<List<String>>();
+                var transacciones = new TransaccionBC().ObtenerCobrosByUsername(db, username);
+                foreach (Transaccion transaccion in transacciones)
+                {
+                    var amount = transaccion.Monto;
+                    string amountStr = amount.ToString("0.00");
+                    var sender = transaccion.IdCuentaOrigen;
+                    var sender2 = db.Cuentas.FirstOrDefault(x => x.IdCuenta == sender);
+                    var sender3 = sender2.IdUsuario;
+                    var senderUser = db.Usuarios.FirstOrDefault(x => x.IdUsuario == sender3);
+                    var senderName = senderUser.Nombre;
+                    var senderLastName = senderUser.Apellido;
+                    string date = transaccion.Fecha.ToString();
+                    List<String> temp = new List<String>();
+                    temp.Add(amountStr);
+                    temp.Add(senderName);
+                    temp.Add(senderLastName);
                     temp.Add(date);
                     transactionList.Add(temp);
                 }

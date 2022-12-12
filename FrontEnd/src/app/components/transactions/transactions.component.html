@@ -38,7 +38,28 @@
     </div>
     <div class="col-lg col-md-6">
       <p class="fw-bold text-decoration-underline">Transferencias</p>
-      <app-transaction-list [list]="lista"></app-transaction-list>
+      <div class="col-md-6" style="display: inline-block">
+        <button
+          type="button"
+          (click)="pagosFunction()"
+          class="btn btn-outline-dark"
+        >
+          Pagos
+        </button>
+        <button
+          type="button"
+          (click)="cobrosFunction()"
+          class="btn btn-outline-dark"
+        >
+          Cobros
+        </button>
+      </div>
+      <ng-template [ngIf]="pagosShow" [ngIfElse]="cobrosShow">
+        <app-transaction-list [list]="listaPagos"></app-transaction-list>
+      </ng-template>
+      <ng-template #cobrosShow>
+        <app-transaction-list [list]="listaCobros"></app-transaction-list>
+      </ng-template>
     </div>
   </div>
 </div>
