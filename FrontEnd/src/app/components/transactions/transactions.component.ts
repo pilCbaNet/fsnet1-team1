@@ -34,6 +34,7 @@ export class TransactionsComponent implements OnInit {
   listaCobros: Array<Array<String>> = [];
   listaPagos: Array<Array<String>> = [];
   listaDepositos: Array<Array<String>> = [];
+  listaRetiros: Array<Array<String>> = [];
 
   pagosShow: boolean = true;
   depositosShow: boolean = true;
@@ -61,6 +62,7 @@ export class TransactionsComponent implements OnInit {
   retirosFunction() {
     this.depositosShow = false;
   }
+
   pagosFunction() {
     this.pagosShow = true;
   }
@@ -113,7 +115,11 @@ export class TransactionsComponent implements OnInit {
     this.clientService.getDepositosByUsername(username).subscribe({
       next: (res) => {
         res.forEach((e) => {
-          this.listaDepositos.unshift([e[0], e[1]]);
+          if (e[0][0] == '-') {
+            this.listaRetiros.push([e[0], e[1]]);
+          } else {
+            this.listaDepositos.push([e[0], e[1]]);
+          }
         });
       },
       error: (e) => {},
@@ -131,6 +137,7 @@ export class TransactionsComponent implements OnInit {
       this.getPagosByUsername(this.user.username);
       this.getCobrosByUsername(this.user.username);
       this.getDepositosByUsername(this.user.username);
+      console.log(this.listaRetiros);
       console.log(this.listaDepositos);
     }
   }
