@@ -19,6 +19,15 @@ export class TransactionListComponent implements OnInit {
   @Input()
   typeMov:string = "";
 
+  @Input()
+  pagosShow: boolean = true;
+
+  @Input()
+  cobrosShow: boolean = true;
+
+  @Input()
+  cobrosShow2: boolean = true;
+
   name: string = '';
   username: string = '';
   i: number = 0;

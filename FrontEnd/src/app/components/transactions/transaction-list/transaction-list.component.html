@@ -1,10 +1,20 @@
 <div class="list" *ngIf="typeMov=='transactions'; else Depositos">
-  <ng-container *ngFor="let t of list | slice : 0 : 5; index as i">
-    <p>
-      <span class="fw-semibold" *ngIf="i < 5">{{ name }}</span> pago $
-      {{ t[0] }} a {{ t[1] }}, {{ t[2] }} en la fecha {{ t[3] }}
-    </p>
-  </ng-container>
+  <ng-template [ngIf]="pagosShow" [ngIfElse]="Other">
+    <ng-container *ngFor="let t of list | slice : 0 : 5; index as i">
+      <p>
+        <span class="fw-semibold" *ngIf="i < 5">{{ name }}</span> pago $
+        {{ t[0] }} a {{ t[1] }}, {{ t[2] }} en la fecha {{ t[3] }}
+      </p>
+    </ng-container>
+  </ng-template>
+  <ng-template #Other>
+    <ng-container *ngFor="let t of list | slice : 0 : 5; index as i">
+      <p>
+        <span class="fw-semibold" *ngIf="i < 5">{{ t[1] }}, {{ t[2] }}</span>
+        pago $ {{ t[0] }} a {{ name }} en la fecha {{ t[3] }}
+      </p>
+    </ng-container>
+  </ng-template>
 </div>
 <ng-template #Depositos>
   <div class="list">

@@ -56,10 +56,13 @@
         </button>
       </div>
       <ng-template [ngIf]="pagosShow" [ngIfElse]="cobrosShow" >
-        <app-transaction-list [list]="listaPagos" [typeMov]="'transactions'"></app-transaction-list>
+        <app-transaction-list
+          [list]="listaPagos" [typeMov]="'transactions'"
+          [pagosShow]="pagosShow"
+        ></app-transaction-list>
       </ng-template>
       <ng-template #cobrosShow>
-        <app-transaction-list [list]="listaCobros" [typeMov]="'transactions'"></app-transaction-list>
+        <app-transaction-list [list]="listaCobros"></app-transaction-list>
       </ng-template>
     </div>
   </div>
