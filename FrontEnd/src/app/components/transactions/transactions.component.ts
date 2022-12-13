@@ -33,8 +33,9 @@ export class TransactionsComponent implements OnInit {
   idCuenta: number = 0;
   listaCobros: Array<Array<String>> = [];
   listaPagos: Array<Array<String>> = [];
+
   pagosShow: boolean = true;
-  cobrosShow: boolean = false;
+
   constructor(
     private clientService: ClientService,
     private ts: TokenService,
@@ -53,11 +54,9 @@ export class TransactionsComponent implements OnInit {
 
   pagosFunction() {
     this.pagosShow = true;
-    this.cobrosShow = false;
   }
 
   cobrosFunction() {
-    this.cobrosShow = true;
     this.pagosShow = false;
   }
   transfer(transferDto: TransferDto) {
@@ -110,9 +109,6 @@ export class TransactionsComponent implements OnInit {
         });
       this.getPagosByUsername(this.user.username);
       this.getCobrosByUsername(this.user.username);
-      console.log(this.user.username);
-      console.log(this.user.password);
-      console.log(this.listaPagos);
     }
   }
 }
