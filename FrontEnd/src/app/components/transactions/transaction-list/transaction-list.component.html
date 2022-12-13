@@ -1,6 +1,18 @@
 <div class="list">
-  <p *ngFor="let t of transactions">
-    <span class="fw-semibold">{{ t.giver ? t.giver.cbu : name }}</span> pago {{ t.amount | currency }} a
-    <span class="fw-semibold">{{ t.receiver ? t.receiver.cbu : name }}</span> el dia {{t.createdOn | date : "short" }}
-  </p>
+  <ng-template [ngIf]="pagosShow" [ngIfElse]="Other">
+    <ng-container *ngFor="let t of list | slice : 0 : 5; index as i">
+      <p>
+        <span class="fw-semibold" *ngIf="i < 5">{{ name }}</span> pago $
+        {{ t[0] }} a {{ t[1] }}, {{ t[2] }} en la fecha {{ t[3] }}
+      </p>
+    </ng-container>
+  </ng-template>
+  <ng-template #Other>
+    <ng-container *ngFor="let t of list | slice : 0 : 5; index as i">
+      <p>
+        <span class="fw-semibold" *ngIf="i < 5">{{ t[1] }}, {{ t[2] }}</span>
+        pago $ {{ t[0] }} a {{ name }} en la fecha {{ t[3] }}
+      </p>
+    </ng-container>
+  </ng-template>
 </div>

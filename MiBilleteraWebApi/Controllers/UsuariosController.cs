@@ -6,7 +6,7 @@ using Negocio;
 using System.Security.Cryptography;
 using System.Text.Json;
 using System.Text.Json.Nodes;
-
+using rngGenClass;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace MiBilleteraWebApi.Controllers
@@ -15,7 +15,7 @@ namespace MiBilleteraWebApi.Controllers
     [ApiController]
     public class UsuariosController : ControllerBase
     {
-        // GET: api/<UsuariosController>
+        // GET: api/Usuarios
         [HttpGet]
         public List<Usuario> Get()
         {
@@ -32,8 +32,16 @@ namespace MiBilleteraWebApi.Controllers
         {
             using (var db = new MiBilleteraContext())
             {
-
                 return new UsuarioBC().ObtenerUsuario(db, id);
+            }
+        }
+
+        [HttpGet("username/{username}")]
+        public Usuario? GetByUsername(string username)
+        {
+            using (var db = new MiBilleteraContext())
+            {
+                return new UsuarioBC().GetUserByUsername(db, username);
             }
         }
 
@@ -42,7 +50,7 @@ namespace MiBilleteraWebApi.Controllers
         {
             using (var db = new MiBilleteraContext())
             {
-                
+
                 return new UsuarioBC().LoginUsuario(db, us, pass);
             }
         }
@@ -58,7 +66,7 @@ namespace MiBilleteraWebApi.Controllers
                     ["token"] = new DateTime(2019, 8, 1),
                     ["clientId"] = user.Cuenta.FirstOrDefault().IdCuenta,
                     ["userId"] = user.IdUsuario,
-                    ["name"] = user.Nombre + ", " + user.Apellido ,
+                    ["name"] = user.Nombre + ", " + user.Apellido,
                     ["username"] = user.Usuario1,
                 };
 
@@ -66,18 +74,46 @@ namespace MiBilleteraWebApi.Controllers
             }
         }
 
-        // POST api/<UsuariosController>
-        [HttpPost]
-        public void Post([FromBody] Usuario U)
+        // POST api/Usuarios/register
+        [HttpPost("register")]
+        public IActionResult Post([FromBody] Usuario U)
         {
+            var currentDate = DateTime.Now;
+            Cuenta cuenta = new Cuenta();
+            cuenta.IdCuenta = U.IdUsuario;
+            cuenta.IdUsuario = U.IdUsuario;
+            cuenta.Cbu = rngGen.RandomString(12);
+            cuenta.Saldo = 0;
+            cuenta.FechaAlta = DateTime.Now;
+            U.FechaAlta = DateTime.Now;
             using (var db = new MiBilleteraContext())
             {
+                if (db.Usuarios.Any(x => x.Usuario1 == U.Usuario1))
+                {
+                    var message = new JsonObject
+                    {
+                        ["message"] = "Username already exists"
+                    };
+                    return BadRequest(message);
+                }
+                do
+                {
+                    cuenta.Cbu = rngGen.RandomString(12);
+                }
+                while (db.Cuentas.Any(x => x.Cbu == cuenta.Cbu));
+                U.Cuenta.Add(cuenta);
                 db.Usuarios.Add(U);
                 db.SaveChanges();
             }
+            var registerResponse = new JsonObject
+            {
+                ["username"] = U.Usuario1
+            };
+
+            return Ok(registerResponse);
         }
 
-        // PUT api/<UsuariosController>/5
+        // PUT api/Usuarios/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] Usuario U)
         {
@@ -98,14 +134,14 @@ namespace MiBilleteraWebApi.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            using (var db= new MiBilleteraContext())
+            using (var db = new MiBilleteraContext())
             {
-                var regCuentas= db.Cuentas.FirstOrDefault(c => c.IdUsuario == id);
+                var regCuentas = db.Cuentas.FirstOrDefault(c => c.IdUsuario == id);
                 if (regCuentas == null)
                 {
-                    var regUsuario = db.Usuarios.FirstOrDefault(u=> u.IdUsuario==id);
+                    var regUsuario = db.Usuarios.FirstOrDefault(u => u.IdUsuario == id);
                     db.Remove(regUsuario);
-                    db.SaveChanges(); 
+                    db.SaveChanges();
                 }
                 else
                 {
@@ -114,6 +150,6 @@ namespace MiBilleteraWebApi.Controllers
             }
 
         }
-        
-    } 
+
+    }
 }

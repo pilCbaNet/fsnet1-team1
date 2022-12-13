@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Client } from '../models/client.model';
 import { Observable } from 'rxjs';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -17,10 +18,14 @@ export class ClientService {
     return this.http.get<Client>(`${this.baseURL}/${id}`);
   }
 
+  findUserByUsername(username: string): Observable<User> {
+    return this.http.get<User>(``);
+  }
+
   addBalance(clientId: number, balance: number) {
     return this.http.put<Client>(`${this.baseURL}/addbalance`, {
-      id:clientId,
-      monto:balance,
+      id: clientId,
+      monto: balance,
     });
   }
 }

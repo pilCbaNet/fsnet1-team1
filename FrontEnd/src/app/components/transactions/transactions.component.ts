@@ -6,6 +6,9 @@ import { TransferDto } from './../../models/transfer-dto.model';
 import { TransfersService } from './../../services/transfers.service';
 import { ToastService } from './../../services/toast.service';
 import { EventTypes } from 'src/app/models/event-types';
+import { User } from 'src/app/models/user.model';
+import { AuthService } from 'src/app/services/auth.service';
+import { registerLocaleData } from '@angular/common';
 
 @Component({
   selector: 'app-transactions',
@@ -19,29 +22,54 @@ export class TransactionsComponent implements OnInit {
     fechaAlta: undefined,
     fechaBaja: undefined,
     transfers: [],
-    deposits: []
+    deposits: [],
   };
+
+  user: User = {
+    username: '',
+    password: '',
+  };
+
+  idCuenta: number = 0;
+  listaCobros: Array<Array<String>> = [];
+  listaPagos: Array<Array<String>> = [];
+
+  pagosShow: boolean = true;
 
   constructor(
     private clientService: ClientService,
     private ts: TokenService,
     private transferService: TransfersService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private authservice: AuthService
   ) {}
 
   addAmount(amount: number) {
-    this.clientService.addBalance(this.client!.idCuenta!, amount).subscribe((c) => {
-      this.client!.saldo = c.saldo;
-    });
+    this.clientService
+      .addBalance(this.client!.idCuenta!, amount)
+      .subscribe((c) => {
+        this.client!.saldo = c.saldo;
+      });
   }
 
+  pagosFunction() {
+    this.pagosShow = true;
+  }
+
+  cobrosFunction() {
+    this.pagosShow = false;
+  }
   transfer(transferDto: TransferDto) {
     this.transferService.postTransfer(transferDto).subscribe({
       next: (t) => {
         this.client.saldo -= t.amount;
-        this.client.transfers.unshift(t)
+        this.client.transfers.unshift(t);
 
-        this.toastService.showToast(':D', `La transferencia fue exitosa`, EventTypes.Success);
+        this.toastService.showToast(
+          ':D',
+          `Transacción realizada con éxito`,
+          EventTypes.Success
+        );
       },
       error: (e) => {
         this.toastService.showToast(':(', e.error.message, EventTypes.Error);
@@ -49,13 +77,38 @@ export class TransactionsComponent implements OnInit {
     });
   }
 
+  getPagosByUsername(username: string) {
+    this.transferService.getPagosByUsername(username).subscribe({
+      next: (res) => {
+        res.forEach((e) => {
+          this.listaPagos.unshift([e[0], e[1], e[2], e[3]]);
+        });
+      },
+      error: (e) => {},
+    });
+  }
+
+  getCobrosByUsername(username: string) {
+    this.transferService.getCobrosByUsername(username).subscribe({
+      next: (res) => {
+        res.forEach((e) => {
+          this.listaCobros.unshift([e[0], e[1], e[2], e[3]]);
+        });
+      },
+      error: (e) => {},
+    });
+  }
+
   ngOnInit(): void {
     if (this.ts.isAuthenticated()) {
+      this.user.username = this.ts.getUsername();
       this.clientService
         .findClientById(this.ts.getClientId())
         .subscribe((c) => {
           this.client = c;
         });
+      this.getPagosByUsername(this.user.username);
+      this.getCobrosByUsername(this.user.username);
     }
   }
 }

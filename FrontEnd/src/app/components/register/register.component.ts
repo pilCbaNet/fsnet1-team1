@@ -30,9 +30,11 @@ export class RegisterComponent {
   ) {
     this.registerForm = this.formBuilder.group(
       {
-        username: ['', [Validators.required, Validators.minLength(3)]],
-        name: ['', [Validators.required, Validators.minLength(3)]],
-        email: ['', [Validators.required, Validators.email]],
+        Usuario1: ['', [Validators.required, Validators.minLength(3)]],
+        Dni: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+        Nombre: ['', [Validators.required, Validators.minLength(3)]],
+        Apellido: ['', [Validators.required, Validators.minLength(3)]],
+        Email: ['', [Validators.required, Validators.email]],
         phone: ['', [Validators.pattern('\\d{8,10}')]],
         password: ['', [Validators.required, Validators.minLength(3)]],
         confirmPassword: ['', Validators.required],
@@ -57,7 +59,7 @@ export class RegisterComponent {
         error: (err) => {
           this.toastService.showToast(
             ':(',
-            err.error.message,
+            `${err.error.message}`,
             EventTypes.Error
           );
           this.registerForm.reset();

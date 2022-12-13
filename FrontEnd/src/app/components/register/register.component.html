@@ -9,38 +9,68 @@
     <h3 class="h3 mb-3 fw-normal text-center">Registro</h3>
     <div class="form-floating has-validation">
       <input
-      type="text"
-      class="form-control top"
-      id="username"
-      placeholder="Nombre de usuario"
-      formControlName="username"
-      required
+        type="text"
+        class="form-control top"
+        id="Usuario1"
+        placeholder="Nombre de usuario"
+        formControlName="Usuario1"
+        required
       />
-      <div class="invalid mb-1">Ingrese un nombre de usuario valido, minimo 3 caracteres</div>
-      <label for="username">Nombre de usuario</label>
+      <div class="invalid mb-1">
+        Ingrese un nombre de usuario valido, minimo 3 caracteres
+      </div>
+      <label for="Usuario1">Nombre de usuario</label>
     </div>
     <div class="form-floating has-validation name">
       <input
         type="text"
         class="form-control middle"
-        id="name"
-        placeholder="Nombre"
-        formControlName="name"
+        id="Dni"
+        placeholder="Número de Documento"
+        formControlName="Dni"
         required
       />
-      <div class="invalid mb-1">Ingrese un nombre valido, minimo 3 caracteres</div>
-      <label for="name">Nombre</label>
+      <div class="invalid mb-1">Ingrese un número de documento válido</div>
+      <label for="dni">DNI</label>
     </div>
     <div class="form-floating has-validation name">
       <input
-        type="email"
+        type="text"
+        class="form-control middle"
+        id="Nombre"
+        placeholder="Nombre"
+        formControlName="Nombre"
+        required
+      />
+      <div class="invalid mb-1">
+        Ingrese un nombre valido, minimo 3 caracteres
+      </div>
+      <label for="Nombre">Nombre</label>
+    </div>
+    <div class="form-floating has-validation name">
+      <input
+        type="text"
+        class="form-control middle"
+        id="Apellido"
+        placeholder="Apellido"
+        formControlName="Apellido"
+        required
+      />
+      <div class="invalid mb-1">
+        Ingrese un nombre valido, minimo 3 caracteres
+      </div>
+      <label for="Apellido">Apellido</label>
+    </div>
+    <div class="form-floating has-validation name">
+      <input
+        type="Email"
         class="form-control middle"
         placeholder="Email"
-        formControlName="email"
+        formControlName="Email"
         required
       />
       <div class="invalid mb-1">Ingrese un Email valido</div>
-      <label for="name">Email</label>
+      <label for="Email">Email</label>
     </div>
     <div class="form-floating has-validation name">
       <input
@@ -50,7 +80,9 @@
         formControlName="phone"
         required
       />
-      <div class="invalid mb-1">Ingrese un Numero valido, entre 8 y 10 caracteres</div>
+      <div class="invalid mb-1">
+        Ingrese un Numero valido, entre 8 y 10 caracteres
+      </div>
       <label for="name">Numero de telefono</label>
     </div>
     <div class="form-floating has-validation password">
@@ -62,7 +94,9 @@
         formControlName="password"
         required
       />
-      <div class="invalid mb-1">Ingrese una contraseña, minimo 3 caracteres</div>
+      <div class="invalid mb-1">
+        Ingrese una contraseña, minimo 3 caracteres
+      </div>
       <label for="password">Contraseña</label>
     </div>
     <div class="form-floating has-validation">
@@ -76,7 +110,11 @@
       <div class="invalid mb-1">Las contraseñas no coinciden</div>
       <label for="password">Reingrese Contraseña</label>
     </div>
-    <button class="w-100 btn btn-lg btn-success mt-2" [disabled]="registerForm.invalid" type="submit">
+    <button
+      class="w-100 btn btn-lg btn-success mt-2"
+      [disabled]="registerForm.invalid"
+      type="submit"
+    >
       Registrarse
     </button>
   </form>

@@ -18,6 +18,12 @@ namespace Negocio
             return cuentaCliente;
         }
 
+        public Usuario? GetUserByUsername(MiBilleteraContext db, string username)
+        {
+            var usuario = db.Usuarios.FirstOrDefault(x => x.Usuario1 == username);
+            return usuario;
+        }
+
         public Usuario LoginUsuario(MiBilleteraContext db, string us, string pass)
         {
             var usuarioLogueado = db.Usuarios.Include(i => i.Cuenta).
