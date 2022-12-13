@@ -42,6 +42,5 @@ export class TransactionListComponent implements OnInit {
   ngOnInit(): void {
     this.name = this.ts.getName();
     this.username = this.ts.getUsername();
-    
   }
 }

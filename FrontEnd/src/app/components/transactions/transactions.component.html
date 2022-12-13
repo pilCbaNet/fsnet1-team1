@@ -54,15 +54,17 @@
         >
           Cobros
         </button>
-      </div>
-      <ng-template [ngIf]="pagosShow" [ngIfElse]="cobrosShow" >
+      </div><ng-template [ngIf]="pagosShow" [ngIfElse]="cobrosShow">
         <app-transaction-list
-          [list]="listaPagos" [typeMov]="'transactions'"
-          [pagosShow]="pagosShow"
+          [list]="listaPagos"
+          [pagosShow]="pagosShow" [typeMov]="'transactions'"
         ></app-transaction-list>
       </ng-template>
       <ng-template #cobrosShow>
-        <app-transaction-list [list]="listaCobros"></app-transaction-list>
+        <app-transaction-list
+          [list]="listaCobros"
+          [pagosShow]="false" [typeMov]="'transactions'"
+        ></app-transaction-list>
       </ng-template>
     </div>
   </div>

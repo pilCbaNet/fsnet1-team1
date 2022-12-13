@@ -32,6 +32,7 @@ export class AddBalanceModalComponent implements OnInit {
   send() {
     if (this.balance && this.balance !== 0) {
       this.amountSend.emit(this.balance);
+      window.location.reload();
     }
   }
 }
