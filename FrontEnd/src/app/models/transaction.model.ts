@@ -9,5 +9,5 @@ export interface Transaction {
 
   receiver?: Client;
 
-  createdOn: Date;
+  createdOn: Date | string;
 }

@@ -131,7 +131,7 @@ export class TransactionsComponent implements OnInit {
             deposits: element.idCuentaNavigation.depositos
           },
           amount: element.monto,
-          createdOn: element.fecha
+          createdOn: new Date(element.fecha).toLocaleString()
         }
         this.depositos.push(dep);
       });

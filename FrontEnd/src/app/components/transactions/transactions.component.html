@@ -3,7 +3,8 @@
     <div class="col-lg col-md-6">
       <p class="fw-bold text-decoration-underline">Depositos</p>
       <app-transaction-list
-        [transactions]="client!.deposits"
+        [transactions]="depositos"
+        [typeMov]="'deposito'"
       ></app-transaction-list>
     </div>
     <div
@@ -54,11 +55,11 @@
           Cobros
         </button>
       </div>
-      <ng-template [ngIf]="pagosShow" [ngIfElse]="cobrosShow">
-        <app-transaction-list [list]="listaPagos"></app-transaction-list>
+      <ng-template [ngIf]="pagosShow" [ngIfElse]="cobrosShow" >
+        <app-transaction-list [list]="listaPagos" [typeMov]="'transactions'"></app-transaction-list>
       </ng-template>
       <ng-template #cobrosShow>
-        <app-transaction-list [list]="listaCobros"></app-transaction-list>
+        <app-transaction-list [list]="listaCobros" [typeMov]="'transactions'"></app-transaction-list>
       </ng-template>
     </div>
   </div>

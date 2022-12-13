@@ -12,7 +12,7 @@ namespace Negocio
     {
         public List<Depositos> ObtenerDepositosByCuenta(MiBilleteraContext db, int id)
         {
-            var depositosCliente = db.Depositos.Include(t => t.IdCuentaNavigation).Where(c => c.IdCuenta == id).ToList();
+            var depositosCliente = db.Depositos.Include(t => t.IdCuentaNavigation).Where(c => c.IdCuenta == id).OrderByDescending(f => f.Fecha).ToList();
             return depositosCliente;
         }
 
