@@ -33,8 +33,10 @@ export class TransactionsComponent implements OnInit {
   idCuenta: number = 0;
   listaCobros: Array<Array<String>> = [];
   listaPagos: Array<Array<String>> = [];
+  listaDepositos: Array<Array<String>> = [];
 
   pagosShow: boolean = true;
+  depositosShow: boolean = true;
 
   constructor(
     private clientService: ClientService,
@@ -52,6 +54,13 @@ export class TransactionsComponent implements OnInit {
       });
   }
 
+  depositosFunction() {
+    this.depositosShow = true;
+  }
+
+  retirosFunction() {
+    this.depositosShow = false;
+  }
   pagosFunction() {
     this.pagosShow = true;
   }
@@ -59,6 +68,7 @@ export class TransactionsComponent implements OnInit {
   cobrosFunction() {
     this.pagosShow = false;
   }
+
   transfer(transferDto: TransferDto) {
     this.transferService.postTransfer(transferDto).subscribe({
       next: (t) => {
@@ -99,6 +109,17 @@ export class TransactionsComponent implements OnInit {
     });
   }
 
+  getDepositosByUsername(username: string) {
+    this.clientService.getDepositosByUsername(username).subscribe({
+      next: (res) => {
+        res.forEach((e) => {
+          this.listaDepositos.unshift([e[0], e[1]]);
+        });
+      },
+      error: (e) => {},
+    });
+  }
+
   ngOnInit(): void {
     if (this.ts.isAuthenticated()) {
       this.user.username = this.ts.getUsername();
@@ -109,6 +130,8 @@ export class TransactionsComponent implements OnInit {
         });
       this.getPagosByUsername(this.user.username);
       this.getCobrosByUsername(this.user.username);
+      this.getDepositosByUsername(this.user.username);
+      console.log(this.listaDepositos);
     }
   }
 }

@@ -28,4 +28,10 @@ export class ClientService {
       monto: balance,
     });
   }
+
+  getDepositosByUsername(username: string): Observable<Array<Array<String>>> {
+    return this.http.get<Array<Array<String>>>(
+      `${this.baseURL}/depositos/${username}`
+    );
+  }
 }

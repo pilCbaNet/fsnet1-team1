@@ -7,15 +7,11 @@ import { Modal } from 'bootstrap';
   styleUrls: ['./add-balance-modal.component.css'],
 })
 export class AddBalanceModalComponent implements OnInit {
-
-
-
   @Input()
   modalId!: string;
 
   @Output()
   amountSend: EventEmitter<number> = new EventEmitter();
-
 
   balance: number | undefined;
 
@@ -27,11 +23,14 @@ export class AddBalanceModalComponent implements OnInit {
     this.balance = undefined;
   }
 
-
-
-  send() {
+  sendDeposito() {
     if (this.balance && this.balance !== 0) {
       this.amountSend.emit(this.balance);
+    }
+  }
+  sendRetiro() {
+    if (this.balance && this.balance !== 0) {
+      this.amountSend.emit(-this.balance);
     }
   }
 }

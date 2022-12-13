@@ -21,6 +21,7 @@ import { TransactionsComponent } from './components/transactions/transactions.co
 import { QuienesSomosComponent } from './components/quienes-somos/quienes-somos.component';
 import { AddBalanceModalComponent } from './components/add-balance-modal/add-balance-modal.component';
 import { TransferBalanceModalComponent } from './components/transfer-balance-modal/transfer-balance-modal.component';
+import { DepositsComponent } from './components/transactions/deposits/deposits.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { TransferBalanceModalComponent } from './components/transfer-balance-mod
     TransactionsComponent,
     QuienesSomosComponent,
     AddBalanceModalComponent,
-    TransferBalanceModalComponent
+    TransferBalanceModalComponent,
+    DepositsComponent
   ],
   imports: [
   BrowserModule,

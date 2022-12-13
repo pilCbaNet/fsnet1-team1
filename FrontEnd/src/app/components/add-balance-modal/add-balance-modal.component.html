@@ -1,5 +1,10 @@
 <!-- Modal -->
-<div class="modal fade" [id]="modalId" tabindex="-1" (hidden.bs.modal)="reset()">
+<div
+  class="modal fade"
+  [id]="modalId"
+  tabindex="-1"
+  (hidden.bs.modal)="reset()"
+>
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -14,14 +19,36 @@
       <div class="modal-body">
         <div class="input-group mb-3">
           <span class="input-group-text" id="basic-addon1">$</span>
-          <input type="number" class="form-control" placeholder="Balance" [(ngModel)]="balance"/>
+          <input
+            type="number"
+            class="form-control"
+            placeholder="Balance"
+            [(ngModel)]="balance"
+          />
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
           Cerrar
         </button>
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" [disabled]="!this.balance || this.balance === 0" (click)="send()">Agregar!</button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-dismiss="modal"
+          [disabled]="!this.balance || this.balance === 0"
+          (click)="sendDeposito()"
+        >
+          Depositar!
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-dismiss="modal"
+          [disabled]="!this.balance || this.balance === 0"
+          (click)="sendRetiro()"
+        >
+          Retirar!
+        </button>
       </div>
     </div>
   </div>

@@ -20,6 +20,8 @@ namespace Entidades
         public virtual DbSet<Transaccion> Transacciones { get; set; } = null!;
         public virtual DbSet<Usuario> Usuarios { get; set; } = null!;
 
+        public virtual DbSet<Depositos> Depositos { get; set; } = null!;
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -92,6 +94,21 @@ namespace Entidades
                 entity.Property(e => e.Usuario1)
                     .HasMaxLength(10)
                     .HasColumnName("Usuario");
+            });
+
+            modelBuilder.Entity<Depositos>(entity =>
+            {
+                entity.HasKey(e => e.IdDepositos);
+
+                entity.Property(e => e.Monto);
+
+                entity.Property(e => e.Fecha).HasColumnType("datetime");
+
+                entity.HasOne(d => d.IdCuentaNavigation)
+                    .WithMany(p => p.Depositos)
+                    .HasForeignKey(d => d.IdCuenta)
+                    .HasConstraintName("fk_cuenta_deposito");
+
             });
 
             OnModelCreatingPartial(modelBuilder);

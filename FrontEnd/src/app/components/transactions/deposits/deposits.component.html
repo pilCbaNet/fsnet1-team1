@@ -1,0 +1,26 @@
+<div class="list">
+  <ng-template [ngIf]="depositosShow" [ngIfElse]="Other">
+    <ng-container *ngFor="let t of list | slice : 0 : 5; index as i">
+      <p>
+        <span class="fw-semibold" *ngIf="i < 5 && t[0][0] != '-'"
+          >Depositaste</span
+        >
+        <span *ngIf="i < 5 && t[0][0] != '-'">
+          ${{ t[0] }} en la fecha {{ t[1] }}
+        </span>
+      </p>
+    </ng-container>
+  </ng-template>
+  <ng-template #Other>
+    <ng-container *ngFor="let t of list | slice : 0 : 5; index as i">
+      <p>
+        <span class="fw-semibold" *ngIf="i < 5 && t[0][0] == '-'"
+          >Retiraste</span
+        >
+        <span *ngIf="i < 5 && t[0][0] == '-'">
+          ${{ t[0].replace('-', '') }} en la fecha {{ t[1] }}
+        </span>
+      </p>
+    </ng-container>
+  </ng-template>
+</div>
