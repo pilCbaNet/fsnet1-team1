@@ -76,8 +76,7 @@ export class TransactionsComponent implements OnInit {
     this.transferService.postTransfer(transferDto).subscribe({
       next: (t) => {
         this.client.saldo -= t.amount;
-        console.log(this.client.saldo)
-        console.log(this.client.transfers)
+        
         // this.client.transfers.unshift(t);
 
         this.toastService.showToast(
@@ -112,6 +111,8 @@ export class TransactionsComponent implements OnInit {
           this.listaCobros.unshift([e[0], e[1], e[2], e[3]]);
         });
       },
+
+      
       error: (e) => {},
     });
   }
@@ -129,7 +130,7 @@ export class TransactionsComponent implements OnInit {
             this.listaDepositos.push([e[0], e[1]]);
           }
         });
-        console.log(this.listaDepositos)
+        
       },
       error: (e) => {},
     });
@@ -147,8 +148,7 @@ export class TransactionsComponent implements OnInit {
       this.getPagosByUsername(this.user.username);
       this.getCobrosByUsername(this.user.username);
       this.getDepositosByUsername(this.user.username);
-      console.log(this.listaRetiros);
-      console.log(this.listaDepositos);
+    
     }
   }
 }
