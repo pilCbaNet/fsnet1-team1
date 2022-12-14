@@ -1,12 +1,12 @@
-<div class="container-fluid text-center" style="color: #3c3c3b">
+<div class="container-fluid text-center main-home" style="color: #3c3c3b">
   <div class="row">
     <div class="col-lg col-md-6">
       <p class="fw-bold text-decoration-underline">Depositos y Retiros</p>
-      <div class="col-md-6" style="display: inline-block">
+      <div class="col-md-6 mb-4" style="display: inline-block">
         <button
           type="button"
           (click)="depositosFunction()"
-          class="btn btn-outline-dark"
+          class="btn btn-outline-dark me-3"
         >
           Depositos
         </button>
@@ -32,7 +32,7 @@
       </ng-template>
     </div>
     <div
-      class="col-lg-3 col-md-6"
+      class="col-lg-3 col-md-6 container-monto-disponible"
       style="border-radius: 25px; background-color: #c1c1c1; padding-top: 20px"
     >
       <p>Mi billetera</p>
@@ -63,11 +63,11 @@
     </div>
     <div class="col-lg col-md-6">
       <p class="fw-bold text-decoration-underline">Transferencias</p>
-      <div class="col-md-6" style="display: inline-block">
+      <div class="col-md-6 mb-4" style="display: inline-block">
         <button
           type="button"
           (click)="pagosFunction()"
-          class="btn btn-outline-dark mr-2"
+          class="btn btn-outline-dark me-3"
         >
           Pagos
         </button>
@@ -97,6 +97,7 @@
   </div>
 </div>
 <app-add-balance-modal
+  class="modal-billetera"
   [modalId]="'addAmountModal'"
   (amountSend)="addAmount($event)"
   [saldo]="client.saldo"

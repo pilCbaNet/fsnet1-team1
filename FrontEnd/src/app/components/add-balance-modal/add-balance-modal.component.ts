@@ -28,7 +28,7 @@ export class AddBalanceModalComponent implements OnInit {
 
   sendDeposito() {
     if (this.balance && this.balance !== 0) {
-      this.amountSend.emit(this.balance);
+      this.amountSend.emit(+this.balance);
     }
   }
   sendRetiro() {
