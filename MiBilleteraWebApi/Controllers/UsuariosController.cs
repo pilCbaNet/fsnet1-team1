@@ -92,7 +92,31 @@ namespace MiBilleteraWebApi.Controllers
                 {
                     var message = new JsonObject
                     {
-                        ["message"] = "Username already exists"
+                        ["message"] = "Ya existe un usuario con este Username"
+                    };
+                    return BadRequest(message);
+                }
+                if (db.Usuarios.Any(x => x.Email == U.Email))
+                {
+                    var message = new JsonObject
+                    {
+                        ["message"] = "Ya existe un usuario con este Email"
+                    };
+                    return BadRequest(message);
+                }
+                if (db.Usuarios.Any(x => x.Dni == U.Dni))
+                {
+                    var message = new JsonObject
+                    {
+                        ["message"] = "Ya existe un usuario con este DNI"
+                    };
+                    return BadRequest(message);
+                }
+                if (db.Usuarios.Any(x => x.Telefono == U.Telefono))
+                {
+                    var message = new JsonObject
+                    {
+                        ["message"] = "Este número de teléfono ya ha sido registrado"
                     };
                     return BadRequest(message);
                 }
