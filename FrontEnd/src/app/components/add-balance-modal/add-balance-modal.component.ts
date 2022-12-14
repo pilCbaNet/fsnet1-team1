@@ -13,6 +13,9 @@ export class AddBalanceModalComponent implements OnInit {
   @Output()
   amountSend: EventEmitter<number> = new EventEmitter();
 
+  @Input()
+  saldo!: number;
+
   balance: number | undefined;
 
   constructor() {}

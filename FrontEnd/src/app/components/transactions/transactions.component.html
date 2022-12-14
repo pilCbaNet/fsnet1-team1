@@ -99,6 +99,7 @@
 <app-add-balance-modal
   [modalId]="'addAmountModal'"
   (amountSend)="addAmount($event)"
+  [saldo]="client.saldo"
 ></app-add-balance-modal>
 <app-transfer-balance-modal
   [balance]="client.saldo"

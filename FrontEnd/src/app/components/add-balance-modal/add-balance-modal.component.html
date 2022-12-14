@@ -8,7 +8,9 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar dinero</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">
+          Ingrese el monto
+        </h1>
         <button
           type="button"
           class="btn-close"
@@ -44,7 +46,9 @@
           type="button"
           class="btn btn-primary"
           data-bs-dismiss="modal"
-          [disabled]="!this.balance || this.balance === 0"
+          [disabled]="
+            !this.balance || this.balance === 0 || this.balance - saldo >= 0
+          "
           (click)="sendRetiro()"
         >
           Retirar!
