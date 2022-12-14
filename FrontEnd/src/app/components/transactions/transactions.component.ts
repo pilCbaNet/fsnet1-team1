@@ -73,10 +73,10 @@ export class TransactionsComponent implements OnInit {
   }
 
   transfer(transferDto: TransferDto) {
-    console.log(transferDto)
     this.transferService.postTransfer(transferDto).subscribe({
       next: (t) => {
         this.client.saldo -= t.amount;
+        console.log(this.client.saldo)
         console.log(this.client.transfers)
         // this.client.transfers.unshift(t);
 
@@ -86,6 +86,7 @@ export class TransactionsComponent implements OnInit {
           EventTypes.Success
         );
         this.getPagosByUsername(this.user.username);
+        window.location.reload()
       },
       error: (e) => {
         this.toastService.showToast(':(', e.error.message, EventTypes.Error);
