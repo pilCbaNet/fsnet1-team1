@@ -47,7 +47,7 @@
           class="btn btn-primary"
           data-bs-dismiss="modal"
           [disabled]="
-            !this.balance || this.balance === 0 || this.balance - saldo >= 0
+            !this.balance || this.balance === 0 || this.balance - saldo > 0.0
           "
           (click)="sendRetiro()"
         >
