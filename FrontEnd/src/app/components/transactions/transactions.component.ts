@@ -53,6 +53,7 @@ export class TransactionsComponent implements OnInit {
       .subscribe((c) => {
         this.client!.saldo = c.saldo;
       });
+      this.getDepositosByUsername(this.user.username);
   }
 
   depositosFunction() {
@@ -72,16 +73,19 @@ export class TransactionsComponent implements OnInit {
   }
 
   transfer(transferDto: TransferDto) {
+    console.log(transferDto)
     this.transferService.postTransfer(transferDto).subscribe({
       next: (t) => {
         this.client.saldo -= t.amount;
-        this.client.transfers.unshift(t);
+        console.log(this.client.transfers)
+        // this.client.transfers.unshift(t);
 
         this.toastService.showToast(
           ':D',
           `Transacción realizada con éxito`,
           EventTypes.Success
         );
+        this.getPagosByUsername(this.user.username);
       },
       error: (e) => {
         this.toastService.showToast(':(', e.error.message, EventTypes.Error);
@@ -114,16 +118,21 @@ export class TransactionsComponent implements OnInit {
   getDepositosByUsername(username: string) {
     this.clientService.getDepositosByUsername(username).subscribe({
       next: (res) => {
+        this.listaRetiros = []
+        this.listaDepositos = []
         res.forEach((e) => {
           if (e[0][0] == '-') {
             this.listaRetiros.push([e[0], e[1]]);
+            
           } else {
             this.listaDepositos.push([e[0], e[1]]);
           }
         });
+        console.log(this.listaDepositos)
       },
       error: (e) => {},
     });
+    
   }
 
   ngOnInit(): void {
