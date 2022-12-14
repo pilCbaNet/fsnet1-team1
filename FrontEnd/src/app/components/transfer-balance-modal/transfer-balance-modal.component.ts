@@ -52,7 +52,7 @@ export class TransferBalanceModalComponent implements OnInit {
     return (control: AbstractControl): ValidationErrors | null => {
       const value = control.value;
 
-      if (!value) {
+      if (!value || value <= 0) {
         return null;
       }
 
