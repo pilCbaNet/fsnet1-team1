@@ -4,6 +4,7 @@ import { EventTypes } from 'src/app/models/event-types';
 import { AuthService } from './../../services/auth.service';
 import { ToastService } from './../../services/toast.service';
 import { Router } from '@angular/router';
+import { EncrDecrService } from 'src/app/helpers/encr-decr-service.service';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private toastService: ToastService,
-    private router: Router
+    private router: Router,
+    private EncrDcr: EncrDecrService
   ) {
     this.loginForm = this.formBuilder.group({
       username: ['', [Validators.required, Validators.minLength(3)]],
@@ -30,6 +32,10 @@ export class LoginComponent implements OnInit {
 
   login() {
     if (this.loginForm.valid) {
+      this.loginForm.value.password = this.EncrDcr.set(
+        this.loginForm.value.password
+      );
+      console.log(this.loginForm.value.password);
       this.authService.login(this.loginForm.value).subscribe({
         next: (resp) => {
           if (resp.message == 'No Username') {

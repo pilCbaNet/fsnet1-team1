@@ -22,6 +22,7 @@ import { QuienesSomosComponent } from './components/quienes-somos/quienes-somos.
 import { AddBalanceModalComponent } from './components/add-balance-modal/add-balance-modal.component';
 import { TransferBalanceModalComponent } from './components/transfer-balance-modal/transfer-balance-modal.component';
 import { DepositsComponent } from './components/transactions/deposits/deposits.component';
+import { EncrDecrService } from './helpers/encr-decr-service.service';
 
 @NgModule({
   declarations: [
@@ -41,10 +42,10 @@ import { DepositsComponent } from './components/transactions/deposits/deposits.c
     QuienesSomosComponent,
     AddBalanceModalComponent,
     TransferBalanceModalComponent,
-    DepositsComponent
+    DepositsComponent,
   ],
   imports: [
-  BrowserModule,
+    BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
@@ -52,6 +53,7 @@ import { DepositsComponent } from './components/transactions/deposits/deposits.c
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    [EncrDecrService],
   ],
   bootstrap: [AppComponent],
 })

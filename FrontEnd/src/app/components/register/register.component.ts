@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { ToastService } from './../../services/toast.service';
 import { AuthService } from './../../services/auth.service';
 import { EventTypes } from 'src/app/models/event-types';
+import { EncrDecrService } from 'src/app/helpers/encr-decr-service.service';
 
 @Component({
   selector: 'app-register',
@@ -26,7 +27,8 @@ export class RegisterComponent {
     private formBuilder: FormBuilder,
     private router: Router,
     private toastService: ToastService,
-    private authService: AuthService
+    private authService: AuthService,
+    private EncrDecr: EncrDecrService
   ) {
     this.registerForm = this.formBuilder.group(
       {
@@ -43,9 +45,16 @@ export class RegisterComponent {
         validator: ConfirmPasswordValidator.MatchPassword,
       } as AbstractControlOptions
     );
+
+    console.log(this.registerForm.value);
   }
+
   register() {
     if (this.registerForm.valid) {
+      this.registerForm.value.password = this.EncrDecr.set(
+        this.registerForm.value.password
+      );
+      console.log(this.registerForm.value);
       this.authService.register(this.registerForm.value).subscribe({
         next: (res) => {
           this.toastService.showToast(

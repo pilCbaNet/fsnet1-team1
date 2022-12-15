@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   baseURL: 'https://localhost:7169',
+  HASH_KEY: '123456$#@$^@1ERF',
 };
 
 /*
