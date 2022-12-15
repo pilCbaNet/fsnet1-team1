@@ -26,7 +26,8 @@ namespace Entidades
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source=DESKTOP-DKDSL10;Initial Catalog=MiBilletera;Integrated Security=True");
+                // optionsBuilder.UseSqlServer("Data Source=DESKTOP-DKDSL10;Initial Catalog=MiBilletera;Integrated Security=True");
+                optionsBuilder.UseSqlServer("Server=Desktop-BD492RD\\SQLEXPRESS;Database=MiBilletera;User Id=emi;Password=emi123; Trusted_Connection=True;");
             }
         }
 

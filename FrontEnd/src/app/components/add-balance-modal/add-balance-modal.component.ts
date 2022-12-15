@@ -29,11 +29,13 @@ export class AddBalanceModalComponent implements OnInit {
   sendDeposito() {
     if (this.balance && this.balance !== 0) {
       this.amountSend.emit(+this.balance);
+      window.location.reload();
     }
   }
   sendRetiro() {
     if (this.balance && this.balance !== 0) {
       this.amountSend.emit(-this.balance);
+      window.location.reload();
     }
   }
 }

@@ -32,21 +32,40 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       this.authService.login(this.loginForm.value).subscribe({
         next: (resp) => {
-          this.toastService.showToast(
-            'Bienvenido',
-            'Usuario correcto',
-            EventTypes.Success
-          );
-          this.router.navigateByUrl('/home');
+          if (resp.message == 'No Username') {
+            this.toastService.showToast(
+              ':(',
+              "Username doesn't exist",
+              EventTypes.Error
+            );
+            this.loginForm.reset();
+          } else if (resp.message == 'Incorrect Password') {
+            this.toastService.showToast(
+              ':(',
+              'Password was incorrect',
+              EventTypes.Error
+            );
+            this.loginForm.reset();
+          } else {
+            this.toastService.showToast(
+              'Bienvenido',
+              'Usuario correcto',
+              EventTypes.Success
+            );
+            this.router.navigateByUrl('/home');
+          }
         },
         error: (err) => {
-          this.toastService.showToast(':(', err.error.message, EventTypes.Error);
+          this.toastService.showToast(
+            ':(',
+            err.error.message,
+            EventTypes.Error
+          );
           this.loginForm.reset();
         },
       });
     }
   }
-
 
   ngOnInit(): void {}
 }

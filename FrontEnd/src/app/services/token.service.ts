@@ -37,11 +37,19 @@ export class TokenService {
   }
 
   login(loginDto: LoginResponse) {
-    localStorage.setItem(TOKEN, loginDto.token);
-    localStorage.setItem(USER_ID, loginDto.userId.toString());
-    localStorage.setItem(CLIENT_ID, loginDto.clientId.toString());
-    localStorage.setItem(NAME, loginDto.name);
-    localStorage.setItem(USERNAME, loginDto.username);
+    if (
+      loginDto.message == 'No Username' ||
+      loginDto.message == 'Incorrect Password'
+    ) {
+      return;
+    } else {
+      localStorage.setItem(TOKEN, loginDto.token);
+      localStorage.setItem(USER_ID, loginDto.userId.toString());
+      localStorage.setItem(CLIENT_ID, loginDto.clientId.toString());
+      localStorage.setItem(NAME, loginDto.name);
+      localStorage.setItem(USERNAME, loginDto.username);
+      return;
+    }
   }
 
   public logout(): void {

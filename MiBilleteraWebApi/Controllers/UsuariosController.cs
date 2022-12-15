@@ -60,17 +60,37 @@ namespace MiBilleteraWebApi.Controllers
         {
             using (var db = new MiBilleteraContext())
             {
-                Usuario user = new UsuarioBC().LoginUsuario(db, login.Username, login.Password);
-                var loginResponse = new JsonObject
+                if (db.Usuarios.Any(x => x.Usuario1 == login.Username))
                 {
-                    ["token"] = new DateTime(2019, 8, 1),
-                    ["clientId"] = user.Cuenta.FirstOrDefault().IdCuenta,
-                    ["userId"] = user.IdUsuario,
-                    ["name"] = user.Nombre + ", " + user.Apellido,
-                    ["username"] = user.Usuario1,
-                };
-
-                return loginResponse;
+                    var temp = db.Usuarios.First(x => x.Usuario1 == login.Username);
+                    if (temp.Password != login.Password)
+                    {
+                        var message = new JsonObject
+                        {
+                            ["message"] = "Incorrect Password"
+                        };
+                        return message;
+                    };
+                    Usuario user = new UsuarioBC().LoginUsuario(db, login.Username, login.Password);
+                    var loginResponse = new JsonObject
+                    {
+                        ["token"] = new DateTime(2019, 8, 1),
+                        ["clientId"] = user.Cuenta.FirstOrDefault().IdCuenta,
+                        ["userId"] = user.IdUsuario,
+                        ["name"] = user.Nombre + ", " + user.Apellido,
+                        ["username"] = user.Usuario1,
+                        ["message"] = "Correct",
+                    };
+                    return loginResponse;
+                }
+                else
+                {
+                    var message = new JsonObject
+                    {
+                        ["message"] = "No Username"
+                    };
+                    return message;
+                }
             }
         }
 
